@@ -6,6 +6,7 @@ const Bienvenida = () => {
   const [csrfToken, setCsrfToken] = useState("");  // Estado para el token CSRF
 
   useEffect(() => {
+    //retest de vercel
     //test de vercel
     // Función para obtener el mensaje y el token CSRF
 const fetchWelcomeMessage = async () => {
