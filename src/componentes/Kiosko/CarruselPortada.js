@@ -3,7 +3,7 @@ import './CarruselPortada.css'; // Asegúrate de tener este archivo para los est
 import useFetchData from './scripts/useFetchData'; // Importa el hook personalizado
 
 const CarruselPortada = () => {
-  const { data: rooms, error, setData } = useFetchData('http://belami.pythonanywhere.com/api/sedes/salas/'); // Usa el hook para obtener las salas
+  const { data: rooms, error, setData } = useFetchData('https://belami.pythonanywhere.com/api/sedes/salas/'); // Usa el hook para obtener las salas
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

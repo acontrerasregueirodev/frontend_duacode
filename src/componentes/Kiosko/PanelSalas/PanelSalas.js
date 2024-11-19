@@ -87,7 +87,7 @@ const ListaReservas = () => {
                 .split('; ')
                 .find(row => row.startsWith('csrftoken='))?.split('=')[1];
 
-            await axios.delete(`http://belami.pythonanywhere.com/api/sedes/reservas/${id}/`, {
+            await axios.delete(`https://belami.pythonanywhere.com/api/sedes/reservas/${id}/`, {
                 withCredentials: true,
                 headers: {
                     'X-CSRFToken': tokenCsrf
@@ -131,7 +131,7 @@ const guardarReservaEditada = async (evento) => {
             .split('; ')
             .find(row => row.startsWith('csrftoken='))?.split('=')[1];
 
-        await axios.put(`http://belami.pythonanywhere.com/api/sedes/reservas/${reservaParaEditar.id}/`, reservaActualizada, {
+        await axios.put(`https://belami.pythonanywhere.com/api/sedes/reservas/${reservaParaEditar.id}/`, reservaActualizada, {
             withCredentials: true,
             headers: {
                 'X-CSRFToken': tokenCsrf
@@ -174,7 +174,7 @@ const guardarReservaEditada = async (evento) => {
                 .split('; ')
                 .find(row => row.startsWith('csrftoken='))?.split('=')[1];
 
-            const respuesta = await axios.post('http://belami.pythonanywhere.com/api/sedes/reservas/', nuevaReserva, {
+            const respuesta = await axios.post('https://belami.pythonanywhere.com/api/sedes/reservas/', nuevaReserva, {
                 withCredentials: true,
                 headers: {
                     'X-CSRFToken': tokenCsrf

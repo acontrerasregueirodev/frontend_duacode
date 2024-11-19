@@ -46,7 +46,7 @@ const FileUpload = ({ onFileUploadSuccess }) => {
     const csrfToken = getCookie('csrftoken'); // Llama a la función para obtener el token CSRF
 
     try {
-      const response = await fetch('http://belami.pythonanywhere.com/upload/', {
+      const response = await fetch('https://belami.pythonanywhere.com/upload/', {
         method: 'POST',
         headers: {
           'X-CSRFToken': csrfToken, // Incluye el token CSRF en los encabezados

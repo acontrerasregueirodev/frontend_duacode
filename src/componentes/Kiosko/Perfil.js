@@ -19,7 +19,7 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
     // Función para obtener los datos del empleado
     const obtenerDatosEmpleado = async () => {
         try {
-            const respuesta = await axios.get(`http://belami.pythonanywhere.com/api/empleados/${id}/`);
+            const respuesta = await axios.get(`https://belami.pythonanywhere.com/api/empleados/${id}/`);
             establecerDatosEmpleado(respuesta.data);
         } catch (error) {
             establecerError(error);

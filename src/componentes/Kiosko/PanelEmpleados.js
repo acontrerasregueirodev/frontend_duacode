@@ -24,7 +24,7 @@ const PanelEmpleados = () => {
   });
   const [error, setError] = useState(null);
 
-  const API_URL = 'http://belami.pythonanywhere.com/api/empleados/';
+  const API_URL = 'https://belami.pythonanywhere.com/api/empleados/';
 
   // Define ROL_CHOICES here
   const ROL_CHOICES = [
