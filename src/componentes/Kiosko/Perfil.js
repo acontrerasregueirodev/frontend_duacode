@@ -36,7 +36,7 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
         try {
             const csrfToken = obtenerCsrfToken();
             const respuesta = await axios.post(
-                'http://localhost:8000/auth/logout/',
+                'https://belami.pythonanywhere.com/auth/logout/',
                 {},
                 {
                     headers: {

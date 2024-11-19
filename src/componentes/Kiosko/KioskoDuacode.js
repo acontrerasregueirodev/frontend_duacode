@@ -12,7 +12,7 @@ import Paneles from './Paneles';
 
 const KioskoDuacode = () => {
   const { data: empleado, error: empleadoError } = useFetchData('https://belami.pythonanywhere.com/api/empleados/8/');
-  const { data: proyecto, error: proyectoError } = useFetchData('https://belami.pythonanywhere.com/api/proyectos/16/');
+  const { data: proyecto, error: proyectoError } = useFetchData('https://belami.pythonanywhere.com/api/proyectos/2/');
   const { data: sedes, error: sedesError } = useFetchData('https://belami.pythonanywhere.com/api/sedes/sedes/');
 
   const primeraSede = sedes && sedes.length > 0 ? sedes[0] : null;
