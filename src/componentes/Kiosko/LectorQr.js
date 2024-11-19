@@ -72,30 +72,36 @@ const LectorQr = () => {
     };
   }, [isAuthenticated]);
 
-  const handleSubmit = async () => {
-    const response = await fetch("https://belami.pythonanywhere.com/auth/login/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "X-CSRFToken": csrfToken,
-      },
-      body: new URLSearchParams({
+import axios from "axios";
+
+const handleSubmit = async () => {
+  try {
+    const response = await axios.post(
+      "https://belami.pythonanywhere.com/auth/login/",
+      new URLSearchParams({
         username: username,
         password: password,
-      }),
-      credentials: "include",
-    });
+      }), // El cuerpo de la solicitud
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "X-CSRFToken": csrfToken, // Incluye el token CSRF
+        },
+        withCredentials: true, // Asegura que se envíen cookies
+      }
+    );
 
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
-      setWelcomeMessage(data.message);
-      setIsAuthenticated(true);
+    // Maneja la respuesta
+    console.log("Login exitoso:", response.data);
+  } catch (error) {
+    // Maneja los errores
+    if (error.response) {
+      console.error("Error en la respuesta del servidor:", error.response.data);
     } else {
-      const errorData = await response.json();
-      setWelcomeMessage(errorData.message || "Error al iniciar sesión");
+      console.error("Error al enviar la solicitud:", error.message);
     }
-  };
+  }
+};
 
   useEffect(() => {
     if (qrScanned && username && password) {
