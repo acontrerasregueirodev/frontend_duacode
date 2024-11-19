@@ -11,7 +11,7 @@ const Bienvenida = () => {
       try {
         const response = await fetch("https://belami.pythonanywhere.com/", {
           method: "GET",
-          credentials: "include", // Necesario para enviar las cookies de CSRF
+          // credentials: "include", // Necesario para enviar las cookies de CSRF
         });
 
         const data = await response.json();
