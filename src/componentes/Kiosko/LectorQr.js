@@ -72,7 +72,7 @@ const LectorQr = () => {
     };
   }, [isAuthenticated]);
 
-import axios from "axios";
+
 
 const handleSubmit = async () => {
   try {
