@@ -11,9 +11,9 @@ import Perfil from './Perfil'; // Importa el componente Perfil
 import Paneles from './Paneles';
 
 const KioskoDuacode = () => {
-  const { data: empleado, error: empleadoError } = useFetchData('http://localhost:8000/api/empleados/8/');
-  const { data: proyecto, error: proyectoError } = useFetchData('http://localhost:8000/api/proyectos/16/');
-  const { data: sedes, error: sedesError } = useFetchData('http://localhost:8000/api/sedes/sedes/');
+  const { data: empleado, error: empleadoError } = useFetchData('http://belami.pythonanywhere.com/api/empleados/8/');
+  const { data: proyecto, error: proyectoError } = useFetchData('http://belami.pythonanywhere.com/api/proyectos/16/');
+  const { data: sedes, error: sedesError } = useFetchData('http://belami.pythonanywhere.com/api/sedes/sedes/');
 
   const primeraSede = sedes && sedes.length > 0 ? sedes[0] : null;
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Controla la autenticación

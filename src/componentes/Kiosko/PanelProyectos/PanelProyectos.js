@@ -20,7 +20,7 @@ const Proyectos = () => {
 
     const obtenerProyectos = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/proyectos/', {
+            const response = await axios.get('http://belami.pythonanywhere.com/api/proyectos/', {
                 withCredentials: true
             });
             setProyectos(Array.isArray(response.data) ? response.data : []);
@@ -33,7 +33,7 @@ const Proyectos = () => {
 
     const obtenerEmpleados = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/empleados/', {
+            const response = await axios.get('http://belami.pythonanywhere.com/api/empleados/', {
                 withCredentials: true
             });
             setEmpleados(response.data); // Guardar los empleados en el estado
@@ -48,7 +48,7 @@ const Proyectos = () => {
                 .split('; ')
                 .find(row => row.startsWith('csrftoken='))?.split('=')[1];
 
-            await axios.delete(`http://localhost:8000/api/proyectos/${id}/`, {
+            await axios.delete(`http://belami.pythonanywhere.com/api/proyectos/${id}/`, {
                 withCredentials: true,
                 headers: {
                     'X-CSRFToken': csrfToken
@@ -80,7 +80,7 @@ const Proyectos = () => {
                 empleados: empleadosActualizados,
             };
 
-            await axios.put(`http://localhost:8000/api/proyectos/${updatedProyecto.id}/`, updatedProyecto, {
+            await axios.put(`http://belami.pythonanywhere.com/api/proyectos/${updatedProyecto.id}/`, updatedProyecto, {
                 withCredentials: true,
                 headers: {
                     'X-CSRFToken': csrfToken
@@ -133,7 +133,7 @@ const Proyectos = () => {
                 .split('; ')
                 .find(row => row.startsWith('csrftoken='))?.split('=')[1];
 
-            await axios.post('http://localhost:8000/api/proyectos/', nuevoProyecto, {
+            await axios.post('http://belami.pythonanywhere.com/api/proyectos/', nuevoProyecto, {
                 withCredentials: true,
                 headers: {
                     'X-CSRFToken': csrfToken

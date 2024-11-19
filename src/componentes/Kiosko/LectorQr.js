@@ -73,7 +73,7 @@ const LectorQr = () => {
   }, [isAuthenticated]);
 
   const handleSubmit = async () => {
-    const response = await fetch("http://localhost:8000/auth/login/", {
+    const response = await fetch("http://belami.pythonanywhere.com/auth/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

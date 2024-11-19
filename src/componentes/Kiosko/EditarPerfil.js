@@ -21,7 +21,7 @@ useEffect(() => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/empleados/${id}/`, {
+        const response = await axios.get(`http://belami.pythonanywhere.com/api/empleados/${id}/`, {
           headers: {
             'X-CSRFToken': obtenerCsrfToken(),
           },
@@ -60,7 +60,7 @@ useEffect(() => {
     };
 
     try {
-      const response = await axios.put(`http://localhost:8000/api/empleados/${id}/`, updatedEmployeeData, {
+      const response = await axios.put(`http://belami.pythonanywhere.com/api/empleados/${id}/`, updatedEmployeeData, {
         headers: {
           'Content-Type': 'application/json',
           'X-CSRFToken': obtenerCsrfToken(),

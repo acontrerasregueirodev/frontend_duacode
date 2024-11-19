@@ -14,7 +14,7 @@ const SedesList = () => {
         try {
             const csrfToken = getCsrfToken();
 
-            const response = await fetch('http://localhost:8000/api/sedes/sedes/', {
+            const response = await fetch('http://belami.pythonanywhere.com/api/sedes/sedes/', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const SedesList = () => {
         try {
             const csrfToken = getCsrfToken();
 
-            const response = await fetch('http://localhost:8000/auth/check_login/', {
+            const response = await fetch('http://belami.pythonanywhere.com/auth/check_login/', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
