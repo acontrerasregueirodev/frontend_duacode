@@ -1,0 +1,235 @@
+.proyectos-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 900px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+.proyectos-header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.proyectos-list {
+  list-style-type: none;
+  padding: 0;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.proyecto-item {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.proyecto-item strong {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.proyecto-item p {
+  color: #555;
+  margin: 5px 0;
+}
+
+.empleados-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.empleado-item {
+  margin-right: 15px;
+  margin-bottom: 15px;
+  max-width: 200px;
+}
+
+
+.empleado-foto {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 5px;
+}
+
+.agregar-proyecto-btn {
+  background-color: #985dd3fa;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  align-self: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.agregar-proyecto-btn:hover {
+  background-color: #61368b;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.editar-proyecto-btn,
+.eliminar-proyecto-btn {
+  background-color: #985dd3fa;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0 10px;
+}
+
+.editar-proyecto-btn:hover,
+.eliminar-proyecto-btn:hover {
+  background-color: #61368b;
+}
+
+.eliminar-proyecto-btn {
+  background-color: #985dd3fa;
+}
+
+.eliminar-proyecto-btn:hover {
+  background-color: #61368b;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  width: 50%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.modal-content input[type="date"] {
+  padding: 8px;
+}
+
+.empleados-asignados,
+.empleados-no-asignados {
+  margin-top: 20px;
+}
+
+.empleados-asignados h4,
+.empleados-no-asignados h4 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.empleado-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.empleado-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.empleado-foto {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.empleado-info span {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+input[type="checkbox"] {
+  margin-left: 15px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.modal-buttons button:first-child {
+  background-color: #61368b;
+  color: white;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #61368b;
+}
+
+.modal-buttons button:last-child {
+  background-color: #6c757d;
+  color: white;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #5a6268;
+}

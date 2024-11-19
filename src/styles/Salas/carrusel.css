@@ -1,0 +1,78 @@
+/* Contenedor principal del carrusel */
+.carrusel-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* Carrusel en sí */
+.carrusel {
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth; /* Desplazamiento suave */
+}
+
+/* Tarjeta individual de cada sala */
+.sala-card {
+  flex: 0 0 100%;
+  min-width: 100%; /* Asegura que cada tarjeta ocupa el ancho completo del contenedor */
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+/* Botones de navegación del carrusel */
+.carrusel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px;
+  z-index: 10; 
+  border-radius: 50%; 
+  transition: background-color 0.3s ease;
+}
+
+/* Posición de los botones */
+.carrusel-button.left {
+  left: -35px;
+}
+
+.carrusel-button.right {
+  right: -35px;
+}
+
+/* Efecto hover en botones */
+.carrusel-button:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Eliminar borde en foco */
+.carrusel-button:focus {
+  outline: none;
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .carrusel-container {
+    width: 100%; /* Asegura que el carrusel ocupe el ancho completo */
+  }
+
+  /* Ajuste de posición para los botones en pantallas pequeñas */
+  .carrusel-button.left {
+    left: 10px;
+  }
+
+  .carrusel-button.right {
+    right: 10px;
+  }
+
+  /* Reducción de padding en tarjetas para pantallas pequeñas */
+  .sala-card {
+    padding: 5px;
+  }
+}

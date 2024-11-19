@@ -1,0 +1,153 @@
+.proyectos-page {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.proyectos-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.proyectos-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 300px;
+  outline: none;
+}
+
+.proyecto-card {
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  max-width: 400px;
+}
+
+.proyecto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.proyecto-card h3 {
+  font-size: 18px;
+  color: #2c3e50;
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+
+.proyecto-card p {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin: 0 0 8px;
+}
+
+.detalles {
+  margin-top: 10px;
+}
+
+.detalles button {
+  background-color: #6c63ff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.detalles button:hover {
+  background-color: #5548c8;
+}
+
+.load-more-button {
+  margin-top: 20px;
+}
+
+.load-more-button button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.load-more-button button:hover {
+  background-color: #2980b9;
+}
+
+.spinner {
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .search-bar input {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .proyecto-card {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  .proyecto-card h3 {
+    font-size: 16px;
+  }
+
+  .proyecto-card p {
+    font-size: 13px;
+  }
+
+  .detalles button,
+  .load-more-button button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .search-bar input {
+    max-width: 350px;
+  }
+
+  .proyecto-card {
+    max-width: 100%;
+  }
+}

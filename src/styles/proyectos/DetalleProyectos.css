@@ -1,0 +1,116 @@
+/* Contenedor Principal */
+.detalle-proyecto-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Título del Proyecto */
+.project-title h1 {
+    font-size: 3em;
+    color: #6c63ff;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Contenedor de Detalles y Panel de Empleados */
+.detalle-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Panel de Detalles del Proyecto y Empleados */
+.detalle-info-panel,
+.empleados-panel {
+    flex: 1 1 45%;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: max-height 0.4s ease;
+    text-align: left;
+}
+
+/* Botón para Colapsar/Expandir Secciones */
+.toggle-section {
+    background-color: #6c63ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-section:hover {
+    background-color: #5548c8;
+}
+
+/* Caja de Información del Proyecto */
+.detalle-info-box p {
+    font-size: 1.2em;
+    color: #34495e;
+    margin-bottom: 10px;
+    line-height: 1.6;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.detalle-info-box p strong {
+    color: #2c3e50;
+}
+
+/* Efecto Hover en cada línea de Detalles del Proyecto */
+.detalle-info-box p:hover {
+    background-color: #ffffff;
+    color: #7e0fee;
+}
+
+/* Lista de Empleados */
+.empleados-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.empleados-list li {
+    font-size: 1.1em;
+    color: #34495e;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Efecto Hover en cada Empleado */
+.empleados-list li:hover {
+    background-color: #f0f4ff;
+    color: #7e0fee;
+}
+
+/* Responsive: Ajuste de Flexbox */
+@media (max-width: 768px) {
+    .detalle-contenedor {
+        flex-direction: column;
+    }
+
+    .detalle-info-panel,
+    .empleados-panel {
+        flex: 1 1 100%;
+    }
+}

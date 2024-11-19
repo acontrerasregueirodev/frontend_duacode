@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 20px;
+}
+
+.form-container {
+    margin-left:50px;
+    display: flex;
+    flex-direction: column;
+    /* Alinea los campos del formulario de forma vertical */
+    max-width: 500px;
+    /* Puedes ajustar el tamaño del formulario */
+    margin-right: 20px;
+    /* Espacio entre el formulario y el video */
+}
+
+.form-group {
+    margin-bottom: 15px;
+    /* Espacio entre los campos del formulario */
+}
+
+.video-container {
+    display: flex;
+    align-items: center;
+    /* Centra el video dentro de su contenedor */
+    margin-left: 20px;
+    /* Espacio entre el formulario y el video */
+}
+
+video {
+    width: 400px;
+    /* Tamaño mayor para el video */
+    height: 300px;
+    /* Ajuste del alto para la webcam */
+}
+
+.submit-button {
+  background-color: #61368c; /* Color base */
+  color: #ffffff; /* Texto blanco */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar efecto de elevación */
+}
+
+.submit-button:hover {
+  background-color: #502d73; /* Color ligeramente más oscuro para hover */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Aumenta la sombra en hover */
+  transform: translateY(-2px); /* Efecto de elevación en hover */
+}
+
+.submit-button:active {
+  background-color: #3e245c; /* Color más oscuro al hacer clic */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Reduce la sombra */
+  transform: translateY(1px); /* Efecto de clic */
+}
