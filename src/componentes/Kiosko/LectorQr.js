@@ -75,6 +75,7 @@ const LectorQr = () => {
 
 
 const handleSubmit = async () => {
+  console.log("estamos en handle submit")
   try {
     const response = await axios.post(
       "https://belami.pythonanywhere.com/auth/login/",
