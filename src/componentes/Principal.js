@@ -12,7 +12,7 @@ function Principal() {
     const fetchEmpleadoDetail = async () => {
       try {
         const id = 2;
-        const response = await axios.get(`http://localhost:8000/api/empleados/${id}`);
+        const response = await axios.get(`https://belami.pythonanywhere.com/api/empleados/${id}`);
         setEmpleadoDetail(response.data);
       } catch (err) {
         setError(`Error: ${err.message}`);
@@ -29,7 +29,7 @@ function Principal() {
       if (!empleadoDetail?.rol) return;
 
       try {
-        const response = await axios.get("http://localhost:8000/api/roles/");
+        const response = await axios.get("https://belami.pythonanywhere.com/api/roles/");
         const roles = response.data;
         const role = roles.find((role) => role.id === empleadoDetail.rol);
 

@@ -27,8 +27,8 @@ const PanelEmpleados = () => {
   });
 
   const [error, setError] = useState(null);
-  const API_URL = "http://localhost:8000/api/empleados/";
-  const ROLES_URL = "http://localhost:8000/api/roles/"; // URL for roles API
+  const API_URL = "https://belami.pythonanywhere.com/api/empleados/";
+  const ROLES_URL = "https://belami.pythonanywhere.com/api/roles/"; // URL for roles API
 
   const leerEmpleados = async () => {
     try {

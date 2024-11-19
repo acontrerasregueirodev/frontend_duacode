@@ -15,7 +15,7 @@ const Salas = () => {
       try {
         console.log(`Fetching salas for sede ID: ${sedeId}`);
         const response = await axios.get(
-          `http://localhost:8000/api/sedes/salas/?sede_id=${sedeId}`
+          `https://belami.pythonanywhere.com/api/sedes/salas/?sede_id=${sedeId}`
         );
         console.log("Salas fetched:", response.data);
         setSalas(response.data);

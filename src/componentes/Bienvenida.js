@@ -9,7 +9,7 @@ const Bienvenida = () => {
     // Función para obtener el mensaje y el token CSRF
     const fetchWelcomeMessage = async () => {
       try {
-        const response = await fetch("http://localhost:8000/", {
+        const response = await fetch("https://belami.pythonanywhere.com/", {
           method: "GET",
           credentials: "include", // Necesario para enviar las cookies de CSRF
         });

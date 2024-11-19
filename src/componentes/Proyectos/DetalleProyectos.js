@@ -20,7 +20,7 @@ const DetalleProyectos = () => {
             setLoadingEmpleados(true);
             setEmpleadosNombres([]);
             const empleadosPromises = empleadosIds.map((empleadoId) =>
-                axios.get(`http://localhost:8000/api/empleados/${empleadoId}/`)
+                axios.get(`https://belami.pythonanywhere.com/api/empleados/${empleadoId}/`)
                     .then(response => {
                         const { nombre, apellido_1, apellido_2 } = response.data;
                         return `${nombre} ${apellido_1} ${apellido_2}`;
@@ -42,7 +42,7 @@ const DetalleProyectos = () => {
         const fetchProyecto = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:8000/api/proyectos/${id}/`);
+                const response = await axios.get(`https://belami.pythonanywhere.com/api/proyectos/${id}/`);
                 setProyectoDetail(response.data);
                 if (response.data.empleados && response.data.empleados.length > 0) {
                     const empleadosIds = response.data.empleados;

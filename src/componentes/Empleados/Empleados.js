@@ -21,7 +21,7 @@ const Empleados = () => {
   const fetchEmployees = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:8000/api/empleados/", {
+      const { data } = await axios.get("https://belami.pythonanywhere.com/api/empleados/", {
         params: { page, limit: employeesPerPage },
       });
       if (data.length > 0) {

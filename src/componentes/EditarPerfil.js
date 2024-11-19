@@ -8,7 +8,7 @@ const EditarPerfil = ({ id, onSave, onCancel }) => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/empleados/${id}/`, {
+        const response = await fetch(`https://belami.pythonanywhere.com/api/empleados/${id}/`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           }
@@ -47,7 +47,7 @@ const EditarPerfil = ({ id, onSave, onCancel }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:8000/api/empleados/${id}/`, {
+      const response = await fetch(`https://belami.pythonanywhere.com/api/empleados/${id}/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

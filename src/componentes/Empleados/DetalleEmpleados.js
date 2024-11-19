@@ -39,7 +39,7 @@ const DetalleEmpleados = () => {
     const fetchEmpleado = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/empleados/${id}/`
+          `https://belami.pythonanywhere.com/api/empleados/${id}/`
         );
         console.log(response.data)
         setEmpleadoDetail(response.data);

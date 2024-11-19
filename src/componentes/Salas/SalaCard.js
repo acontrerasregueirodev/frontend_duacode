@@ -10,7 +10,7 @@ const SalaCard = ({ sala }) => {
   useEffect(() => {
     const fetchSedes = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/sedes/sedes/");
+        const response = await axios.get("https://belami.pythonanywhere.com/api/sedes/sedes/");
         setSedes(response.data);
         setLoading(false);
       } catch (error) {

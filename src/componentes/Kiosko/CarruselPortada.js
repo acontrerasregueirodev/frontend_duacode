@@ -33,7 +33,7 @@ const CarruselPortada = () => {
       {rooms && rooms.length > 0 ? (
         <div className="image-container">
           <img
-            src={`http://localhost:8000${rooms[currentIndex].imagen_url}`} // Mostrar la imagen
+            src={`https://belami.pythonanywhere.com${rooms[currentIndex].imagen_url}`} // Mostrar la imagen
             alt={`Imagen de ${rooms[currentIndex].nombre}`}
             className="carousel-image"
           />

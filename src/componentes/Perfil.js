@@ -12,13 +12,13 @@ export const getCsrfToken = () => {
 };
 
 const Perfil = ({ id, setIsAuthenticated, onLogout }) => {
-    const { data: employeeData, error, refetch } = useFetchData(`http://localhost:8000/api/empleados/${id}/`);
+    const { data: employeeData, error, refetch } = useFetchData(`https://belami.pythonanywhere.com/api/empleados/${id}/`);
     const [isEditing, setIsEditing] = useState(false);
 
     const handleLogout = async () => {
         try {
             const csrfToken = getCsrfToken();
-            const response = await fetch('http://localhost:8000/auth/logout/', {
+            const response = await fetch('hhttps://belami.pythonanywhere.com/auth/logout/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

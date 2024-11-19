@@ -19,7 +19,7 @@ const EmpleadoManager = () => {
 
   // Cargar empleados
   const fetchEmpleados = async () => {
-    const response = await axios.get("http://localhost:8000/api/empleados/");
+    const response = await axios.get("https://belami.pythonanywhere.com/api/empleados/");
     setEmpleados(response.data);
   };
 
@@ -42,7 +42,7 @@ const EmpleadoManager = () => {
       if (editingEmpleadoId) {
         // Actualizar empleado
         await axios.put(
-          `http://localhost:8000/api/empleados/${editingEmpleadoId}/`,
+          `https://belami.pythonanywhere.com/api/empleados/${editingEmpleadoId}/`,
           formDataToSend,
           {
             headers: {
@@ -53,7 +53,7 @@ const EmpleadoManager = () => {
       } else {
         // Crear nuevo empleado
         await axios.post(
-          "http://localhost:8000/api/empleados/",
+          "https://belami.pythonanywhere.com/api/empleados/",
           formDataToSend,
           {
             headers: {
@@ -76,7 +76,7 @@ const EmpleadoManager = () => {
   //Eliminar empleado
   const deleteEmpleado = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/empleados/${id}/`);
+      await axios.delete(`https://belami.pythonanywhere.com/api/empleados/${id}/`);
       fetchEmpleados();
     } catch (error) {
       console.error("Error al eliminar empleado:", error);

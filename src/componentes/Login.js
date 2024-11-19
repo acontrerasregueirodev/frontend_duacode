@@ -76,7 +76,7 @@ const Login = () => {
     if (e) e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/auth/login/', {
+      const response = await fetch('https://belami.pythonanywhere.com/auth/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',

@@ -63,7 +63,7 @@ const Reserva = () => {
   useEffect(() => {
     const fetchReservas = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/sedes/reservas/');
+        const response = await axios.get('https://belami.pythonanywhere.com/api/sedes/reservas/');
         const reservasFormateadas = response.data.map((reserva) => ({
           id: reserva.id,
           title: `Reserva Sala ${reserva.sala_id}`,
@@ -92,7 +92,7 @@ const Reserva = () => {
 
     try {
       console.log("Enviando datos a la API:", reservaData); // Verificación de datos a enviar.
-      const response = await axios.post('http://localhost:8000/api/reserva/', reservaData);
+      const response = await axios.post('https://belami.pythonanywhere.com/api/reserva/', reservaData);
       
       console.log("Respuesta de la API:", response.data); // Verificación de respuesta del servidor.
       

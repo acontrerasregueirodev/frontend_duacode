@@ -22,7 +22,7 @@ const Proyectos = () => {
   const fetchProyectos = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8000/api/proyectos/", {
+      const response = await axios.get("https://belami.pythonanywhere.com/api/proyectos/", {
         params: { page, limit: proyectosPorPagina },
       });
       const newProyectos = response.data;

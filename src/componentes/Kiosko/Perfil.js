@@ -65,7 +65,7 @@ const manejarGuardar = async (datosActualizados) => {
 
     try {
         const respuesta = await axios.put(
-            `http://localhost:8000/api/empleados/${id}/`,
+            `https://belami.pythonanywhere.com/api/empleados/${id}/`,
             datosActualizados,
             {
                 headers: {
