@@ -1,72 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import ProtocoloCategoria from './ProtocoloCategoria';
-import FileUpload from '../Kiosko/FileUpload';  // Asegúrate de importar el componente FileUpload
-import '../../styles/Protocolos/protocolos.css'; // Asegúrate de tener los estilos aquí.
+import FileUpload from '../Kiosko/FileUpload';  
+import '../../styles/Protocolos/protocolos.css'; 
 
 const Protocolos = () => {
-  const [categorias, setCategorias] = useState([]);
+  const [protocolos, setProtocolos] = useState([]);
 
-  // Simulación de datos (esto podría venir de una API real).
   useEffect(() => {
-    const data = [
-      {
-        categoria: 'Acceso Oficina',
-        protocolos: [
-          {
-            titulo: 'Protocolo de Seguridad en la Oficina',
-            descripcion: 'Cómo acceder y las medidas de seguridad en las oficinas.',
-            enlace: '',
-          },
-          {
-            titulo: 'Protocolo de Ingreso para Visitantes',
-            descripcion: 'Normas de acceso para visitantes y proveedores.',
-            enlace: '',
-          },
-        ],
-      },
-      {
-        categoria: 'Manuales de la Empresa',
-        protocolos: [
-          {
-            titulo: 'Manual de Conducta Laboral',
-            descripcion: 'Políticas y normas de conducta laboral en la empresa.',
-            enlace: '',
-          },
-          {
-            titulo: 'Guía de Recursos Humanos',
-            descripcion: 'Recursos y guías para los empleados.',
-            enlace: '',
-          },
-        ],
-      },
-    ];
-
-    setCategorias(data);
+    fetch('https://belami.pythonanywhere.com/upload/')
+      .then((response) => response.json())
+      .then((data) => {
+        setProtocolos(data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener los protocolos:', error);
+      });
   }, []);
 
-  // Función que maneja el éxito del archivo subido
-  const handleFileUploadSuccess = (newFile, categoriaIndex) => {
-    // Actualizar el estado para incluir el archivo subido y la descripción del usuario
-    const updatedCategorias = [...categorias];
-    updatedCategorias[categoriaIndex].protocolos.push({
-      titulo: newFile.name,
-      descripcion: newFile.descripcion, // Descripción proporcionada por el usuario
-      enlace: newFile.url || '', // Asegúrate de que el servidor responda con la URL del archivo
-    });
-
-    setCategorias(updatedCategorias);
+  const handleFileUploadSuccess = (newFile) => {
+    setProtocolos((prevProtocolos) => [
+      ...prevProtocolos,
+      {
+        titulo: newFile.name,
+        descripcion: newFile.descripcion || '', 
+        enlace: newFile.url || '', 
+      }
+    ]);
   };
 
   return (
     <div className="protocolos-container">
       <h1>Protocolos de la Empresa</h1>
       
-      {categorias.map((categoria, index) => (
-        <ProtocoloCategoria key={index} categoria={categoria} />
-      ))}
+      {protocolos.length > 0 ? (
+        protocolos.map((protocolo, index) => (
+          <div key={index} className="protocolo">
+            <h2>{protocolo.titulo}</h2>
+            <p>{protocolo.descripcion}</p>
+            {protocolo.enlace && (
+              <a href={protocolo.enlace} target="_blank" rel="noopener noreferrer">
+                Ver Protocolo
+              </a>
+            )}
+          </div>
+        ))
+      ) : (
+        <p>No hay protocolos disponibles.</p>
+      )}
 
-      {/* Mover FileUpload abajo */}
-      <FileUpload onFileUploadSuccess={(newFile) => handleFileUploadSuccess(newFile, 0)} />
+      <FileUpload onFileUploadSuccess={handleFileUploadSuccess} />
     </div>
   );
 };
