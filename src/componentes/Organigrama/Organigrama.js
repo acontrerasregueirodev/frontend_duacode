@@ -1,51 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Departamento from './Departamento';
-import '../../styles//Organigrama/organigrama.css'; // Asegúrate de tener los estilos aquí.
+import axios from 'axios';
+import '../../styles/Organigrama/organigrama.css'; // Asegúrate de tener los estilos aquí.
 
 const Organigrama = () => {
   const [departamentos, setDepartamentos] = useState([]);
 
-  // Simulación de datos (puede venir de una API)
   useEffect(() => {
-    const data = [
-      {
-        departamento: 'Desarrollo',
-        empleados: [
-          {
-            nombre: 'Brittany',
-            perfil: 'Frontend',
-            foto: 'brittany.jpg',
-            email: 'brittany@duacode.com'
-          },
-          {
-            nombre: 'Alex',
-            perfil: 'Backend',
-            foto: 'alex.jpg',
-            email: 'alex@duacode.com'
-          }
-        ]
-      },
-      {
-        departamento: 'Marketing',
-        empleados: [
-          {
-            nombre: 'Ana',
-            perfil: 'Diseñadora',
-            foto: 'ana.jpg',
-            email: 'ana@duacode.com'
-          },
-          {
-            nombre: 'Felipe',
-            perfil: 'Diseñadora',
-            foto: 'ana.jpg',
-            email: 'ana@duacode.com'
-          }
-          
-        ]
-      }
-    ];
+    const fetchDepartamentos = async () => {
+      try {
+        const response = await axios.get('https://belami.pythonanywhere.com/api/departamentos/');
+        const data = response.data;
 
-    setDepartamentos(data); // Cargar los datos simulados
+        // Ordenar empleados dentro de cada departamento por rango (de mayor a menor).
+        const departamentosOrdenados = data.map((departamento) => ({
+          ...departamento,
+          empleados: departamento.empleados.sort((a, b) => b.rango - a.rango), // Supongamos que "rango" es un número mayor para cargos altos.
+        }));
+
+        setDepartamentos(departamentosOrdenados);
+      } catch (error) {
+        console.error('Error al obtener los departamentos:', error);
+      }
+    };
+
+    fetchDepartamentos();
   }, []);
 
   return (

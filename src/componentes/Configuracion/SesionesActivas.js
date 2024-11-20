@@ -1,42 +1,42 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
-const SesionesActivas = () => {
-  const [sesiones, setSesiones] = useState([
-    {
-      dispositivo: "Windows - Chrome",
-      ultimaActividad: "Hace 2 horas",
-    },
-    {
-      dispositivo: "Android - Firefox",
-      ultimaActividad: "Hace 1 día",
-    },
-  ]);
+// const SesionesActivas = () => {
+//   const [sesiones, setSesiones] = useState([
+//     {
+//       dispositivo: "Windows - Chrome",
+//       ultimaActividad: "Hace 2 horas",
+//     },
+//     {
+//       dispositivo: "Android - Firefox",
+//       ultimaActividad: "Hace 1 día",
+//     },
+//   ]);
 
-  const handleCerrarSesion = (dispositivo) => {
-    alert(`Cerrada sesión en: ${dispositivo}`);
+//   const handleCerrarSesion = (dispositivo) => {
+//     alert(`Cerrada sesión en: ${dispositivo}`);
 
-    //Borrar sesion activa
-    setSesiones(
-      sesiones.filter((sesion) => sesion.dispositivo !== dispositivo)
-    );
-  };
+//     //Borrar sesion activa
+//     setSesiones(
+//       sesiones.filter((sesion) => sesion.dispositivo !== dispositivo)
+//     );
+//   };
 
-  return (
-    <div className="config-section">
-      <h2>Sesiones Activas</h2>
-      <ul className="sesiones-activas">
-        {sesiones.map((sesion, index) => (
-          <li key={index}>
-            <strong>Dispositivo:</strong> {sesion.dispositivo} <br />
-            <strong>Última Actividad:</strong> {sesion.ultimaActividad} <br />
-            <button onClick={() => handleCerrarSesion(sesion.dispositivo)}>
-              Cerrar Sesión
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+//   return (
+//     <div className="config-section">
+//       <h2>Sesiones Activas</h2>
+//       <ul className="sesiones-activas">
+//         {sesiones.map((sesion, index) => (
+//           <li key={index}>
+//             <strong>Dispositivo:</strong> {sesion.dispositivo} <br />
+//             <strong>Última Actividad:</strong> {sesion.ultimaActividad} <br />
+//             <button onClick={() => handleCerrarSesion(sesion.dispositivo)}>
+//               Cerrar Sesión
+//             </button>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
 
-export default SesionesActivas;
+// export default SesionesActivas;

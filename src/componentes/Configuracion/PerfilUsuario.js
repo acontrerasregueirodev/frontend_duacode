@@ -1,5 +1,3 @@
-
-//Este componente se encargará de la sección de perfil de usuario.
 import React, { useState } from 'react';
 
 const PerfilUsuario = () => {

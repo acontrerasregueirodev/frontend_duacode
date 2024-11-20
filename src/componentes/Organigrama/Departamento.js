@@ -4,7 +4,7 @@ import Empleado from './Empleado';
 const Departamento = ({ departamento }) => {
   return (
     <div className="departamento">
-      <h2>{departamento.departamento}</h2>
+      <h2>{departamento.nombre}</h2>
       <div className="empleados">
         {departamento.empleados.map((empleado, index) => (
           <Empleado key={index} empleado={empleado} />
