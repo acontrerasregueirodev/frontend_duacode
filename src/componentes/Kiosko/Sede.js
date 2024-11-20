@@ -1,45 +1,39 @@
 import React, { useState, useEffect } from 'react';
-
+import axios from 'axios'
 const SedesList = () => {
     const [sede, setSede] = useState(null);  // Estado para almacenar una sola sede
     const [loginStatus, setLoginStatus] = useState(null);  // Estado para el estado de sesión
 
-    const getCsrfToken = () => {
-        const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
-        return csrfToken ? csrfToken.split('=')[1] : null;
-    };
+const getCsrfToken = () => {
+  return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
+};
+
 
     // Función para obtener las sedes desde la API
     const fetchSede = async () => {
-        try {
-            const csrfToken = getCsrfToken();
+    try {
+        const csrfToken = getCsrfToken(); // Asegúrate de tener esta función definida.
 
-            const response = await fetch('https://belami.pythonanywhere.com/api/sedes/sedes/', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken,
-                },
-                credentials: 'include',
-            });
+        const response = await axios.get('https://belami.pythonanywhere.com/api/sedes/sedes/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+            },
+            // withCredentials: true, // Incluye cookies y credenciales
+        });
 
-            if (!response.ok) {
-                throw new Error('Error al obtener la sede');
-            }
+        const data = response.data;
+        console.log("Datos obtenidos:", data);
 
-            const data = await response.json();
-            console.log("Datos obtenidos:", data);
-
-            // Si la respuesta es un arreglo y contiene al menos una sede
-            if (Array.isArray(data) && data.length > 0) {
-                setSede(data[0]);  // Establece solo la primera sede
-            } else {
-                console.error('No se encontraron sedes:', data);
-            }
-
-        } catch (error) {
-            console.error('Error al obtener la sede:', error.message);
+        // Si la respuesta es un arreglo y contiene al menos una sede
+        if (Array.isArray(data) && data.length > 0) {
+            setSede(data[0]); // Establece solo la primera sede
+        } else {
+            console.error('No se encontraron sedes:', data);
         }
+    } catch (error) {
+        console.error('Error al obtener la sede:', error.message);
+    }
     };
 
     useEffect(() => {

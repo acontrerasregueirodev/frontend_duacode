@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './PanelEmpleados.css';
 
-// Function to get CSRF token
 const getCsrfToken = () => {
   return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
 };

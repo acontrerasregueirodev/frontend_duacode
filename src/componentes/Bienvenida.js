@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 const Bienvenida = () => {
   const [welcomeMessage, setWelcomeMessage] = useState(""); // Estado para el mensaje
   const [csrfToken, setCsrfToken] = useState("");  // Estado para el token CSRF
 
   useEffect(() => {
-    // Función para obtener el mensaje y el token CSRF
-    const fetchWelcomeMessage = async () => {
-      try {
-        const response = await fetch("https://belami.pythonanywhere.com/", {
-          method: "GET",
-          credentials: "include", // Necesario para enviar las cookies de CSRF
-        });
+   // Función para obtener el mensaje y el token CSRF
+const fetchWelcomeMessage = async () => {
+  console.log("welcome message")
+  try {
+    const response = await axios.get("https://belami.pythonanywhere.com/", {
+      // withCredentials: true, // Esto es necesario para enviar las cookies de CSRF
+    });
 
-        const data = await response.json();
-        console.log(data);
-        setWelcomeMessage(data.message);  // Establecemos el mensaje
-        setCsrfToken(data.csrfToken);  // Establecemos el token CSRF
+    // Si la respuesta es exitosa
+    console.log(response.data);
+    setWelcomeMessage(response.data.message);  // Establecemos el mensaje
+    setCsrfToken(response.data.csrfToken);  // Establecemos el token CSRF
 
-      } catch (error) {
-        console.error("Error al obtener el mensaje:", error);
-      }
-    };
+  } catch (error) {
+    // Si ocurre un error al obtener el mensaje
+    console.error("Error al obtener el mensaje:", error);
+  }
+};
 
     fetchWelcomeMessage();
   }, []);  // Este efecto se ejecutará solo una vez cuando el componente se monte
