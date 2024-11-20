@@ -1,0 +1,185 @@
+/* Barra en movimiento con inclinación y expansión */
+.moving-bar {
+  width: 100vw;
+  height: 80px;
+  overflow: hidden;
+  background-color: #61368c;
+  padding: 10px 0;
+  position: relative;
+  z-index: 1000; /* Asegura que esté sobre el contenido */
+  transform: rotate(-5deg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 50px; /* Espacio debajo de la barra */
+}
+
+/* Contenedor del texto y la imagen duplicados */
+.moving-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite; /* Animación continua sin cortes */
+}
+
+/* Animación de desplazamiento horizontal */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(
+      -50%
+    ); /* Mueve el contenido a la izquierda y reinicia */
+  }
+}
+
+/* Texto en movimiento */
+.moving-text {
+  font-size: 1.5em;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+.moving-text span.uxperience {
+  color: #ff009d; /* Personalización de "UXPERIENCE" en color rosa */
+}
+
+/* Logo en la barra en movimiento */
+.moving-logo {
+  height: 60px;
+  margin-left: 30px;
+}
+
+/* Elementos duplicados para llenar espacios vacíos */
+.moving-item {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}
+
+/* Contenedor principal de las sedes */
+.sedes-container {
+  text-align: center;
+  padding: 20px;
+  margin-top: 120px; /* Evita el solapamiento con la MovingBar */
+  margin-bottom: 250px; /* Espacio adicional antes del footer */
+}
+
+/* Grid de sedes */
+.sedes-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Tarjetas de sedes */
+.sede-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+  width: 280px;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Efecto hover en tarjetas de sedes */
+.sede-card:hover {
+  background-color: #61368cb6;
+  color: #fff;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Icono de la sede */
+.sede-icon {
+  color: #61368c;
+  margin-bottom: 10px;
+}
+
+.sede-card:hover .sede-icon {
+  color: #fff; /* Cambia el color al hacer hover */
+}
+
+/* Estilo para título y texto en la tarjeta */
+.sede-card h2 {
+  font-size: 1.6em;
+  margin-bottom: 10px;
+}
+
+.sede-card p {
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+/* Botón "Ver Salas Disponibles" */
+.ver-salas-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #ff009d;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.ver-salas-btn:hover {
+  background-color: #ff66b3;
+}
+
+/* Footer fijo en la parte inferior */
+.footer {
+  background-color: #61368c;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Información del footer */
+.footer-info {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-info p {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+.footer-info a {
+  color: #ff66b3;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer-info a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .sedes-grid {
+    display: block;
+    gap: 20px;
+  }
+
+  .sede-card {
+    margin-bottom: 20px;
+  }
+}

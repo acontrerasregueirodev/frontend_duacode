@@ -1,0 +1,89 @@
+/* Contenedor principal de la configuración */
+.configuracion-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh; /* Asegura que el contenedor ocupe toda la altura visible */
+  overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede la pantalla */
+  margin-bottom: 100px; /* Espacio extra para evitar solapamiento con el footer */
+}
+
+/* Título de la página de configuración */
+.configuracion-container h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #61368c;
+  margin-bottom: 40px;
+}
+
+/* Distribuye las secciones en 2 columnas */
+.configuracion-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+/* Estilo para cada sección de configuración */
+.config-section {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.config-section h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.8em;
+}
+
+/* Estilo para inputs y select */
+.config-section input,
+.config-section select {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Botones de cada sección */
+.config-section button {
+  background-color: #ff009d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.config-section button:hover {
+  background-color: #ff66b3;
+}
+
+/* Lista de sesiones activas */
+.sesiones-activas {
+  list-style: none;
+  padding: 0;
+}
+
+.sesiones-activas li {
+  margin-bottom: 15px;
+  font-size: 1.1em;
+  text-align: left;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .configuracion-grid {
+    grid-template-columns: 1fr; /* Cambia a una sola columna */
+  }
+
+  .config-section {
+    margin-bottom: 30px;
+  }
+}
