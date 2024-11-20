@@ -146,3 +146,23 @@
 .file-upload button:hover {
   background-color: #ff66b3;
 }
+.protocolo-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.file-upload input {
+  margin-top: 10px;
+}
+
+.protocolo-enlace.disabled {
+  pointer-events: none;
+  color: gray;
+  text-decoration: none;
+}
