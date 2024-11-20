@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './PanelEmpleados.css';
-<<<<<<< HEAD
-
-=======
 import axios from 'axios'
->>>>>>> 340d2d617a5fca4a83f163e74cbc12209bceec23
 const getCsrfToken = () => {
   return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
 };
@@ -66,28 +62,6 @@ const PanelEmpleados = () => {
     leerEmpleados();
   }, []);
 
-<<<<<<< HEAD
-  const eliminarEmpleado = async (empleadoId) => {
-    try {
-      const response = await fetch(`${API_URL}${empleadoId}/`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': getCsrfToken(),
-        },
-        credentials: 'include',
-      });
-
-      if (!response.ok) throw new Error('Error al eliminar empleado');
-      
-      await leerEmpleados();
-      alert("Empleado eliminado con éxito.");
-    } catch (error) {
-      console.error("Error al eliminar empleado:", error);
-      alert("No se pudo eliminar el empleado.");
-    }
-  };
-=======
 const eliminarEmpleado = async (empleadoId) => {
   try {
     const csrfToken = getCsrfToken(); // Asegúrate de que esta función obtenga correctamente el token CSRF
@@ -113,7 +87,6 @@ const eliminarEmpleado = async (empleadoId) => {
     alert("No se pudo eliminar el empleado.");
   }
 };
->>>>>>> 340d2d617a5fca4a83f163e74cbc12209bceec23
 
 const agregarEmpleado = async () => {
   const empleadoData = new FormData();

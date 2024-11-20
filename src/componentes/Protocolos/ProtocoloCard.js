@@ -13,7 +13,7 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
     formData.append('file', file);
 
     try {
-      const response = await fetch('https://your-api-endpoint/upload', {
+      const response = await fetch('https://belami.pythonanywhere.com/', {
         method: 'POST',
         body: formData,
       });
