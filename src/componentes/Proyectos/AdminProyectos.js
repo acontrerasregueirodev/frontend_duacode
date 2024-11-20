@@ -316,7 +316,6 @@ const Proyectos = () => {
         </div>
       )}
 
-      {/* Mover el botón de agregar proyecto abajo */}
       <button
         className="agregar-proyecto-btn"
         onClick={() => setModalNuevoProyectoVisible(true)}

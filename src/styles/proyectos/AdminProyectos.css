@@ -50,43 +50,39 @@
 }
 
 .empleado-item {
-  margin-right: 15px;
+  display: flex;
+  align-items: center;
   margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
   max-width: 200px;
 }
 
-
 .empleado-foto {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  margin-right: 10px;
   margin-top: 5px;
 }
 
-.agregar-proyecto-btn {
-  background-color: #985dd3fa;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  align-self: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.agregar-proyecto-btn:hover {
-  background-color: #61368b;
-}
-
-.buttons-container {
+.empleado-info {
   display: flex;
-  justify-content: center;
-  margin-top: 15px;
+  align-items: center;
+  flex-grow: 1;
 }
 
+.empleado-info span {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+input[type="checkbox"] {
+  margin-left: 15px;
+}
+
+.agregar-proyecto-btn,
 .editar-proyecto-btn,
 .eliminar-proyecto-btn {
   background-color: #985dd3fa;
@@ -97,17 +93,13 @@
   cursor: pointer;
   font-size: 1rem;
   margin: 0 10px;
+  align-self: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
+.agregar-proyecto-btn:hover,
 .editar-proyecto-btn:hover,
-.eliminar-proyecto-btn:hover {
-  background-color: #61368b;
-}
-
-.eliminar-proyecto-btn {
-  background-color: #985dd3fa;
-}
-
 .eliminar-proyecto-btn:hover {
   background-color: #61368b;
 }
@@ -170,37 +162,6 @@
 .empleados-no-asignados h4 {
   font-size: 1.2rem;
   margin-bottom: 15px;
-}
-
-.empleado-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-}
-
-.empleado-info {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.empleado-foto {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.empleado-info span {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-input[type="checkbox"] {
-  margin-left: 15px;
 }
 
 .modal-buttons {
