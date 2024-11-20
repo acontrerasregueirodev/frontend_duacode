@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './PanelEmpleados.css';
-
+import axios from 'axios'
 const getCsrfToken = () => {
   return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
 };
@@ -62,26 +62,31 @@ const PanelEmpleados = () => {
     leerEmpleados();
   }, []);
 
-  const eliminarEmpleado = async (empleadoId) => {
-    try {
-      const response = await fetch(`${API_URL}${empleadoId}/`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': getCsrfToken(),
-        },
-        credentials: 'include',
-      });
+const eliminarEmpleado = async (empleadoId) => {
+  try {
+    const csrfToken = getCsrfToken(); // Asegúrate de que esta función obtenga correctamente el token CSRF
 
-      if (!response.ok) throw new Error('Error al eliminar empleado');
-      
-      await leerEmpleados();
-      alert("Empleado eliminado con éxito.");
-    } catch (error) {
-      console.error("Error al eliminar empleado:", error);
-      alert("No se pudo eliminar el empleado.");
+    const response = await axios.delete(`${API_URL}${empleadoId}/`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+      },
+      withCredentials: true, // Incluir cookies y credenciales
+    });
+
+    // Verifica si la solicitud fue exitosa
+    if (response.status !== 204) {
+      throw new Error('Error al eliminar empleado');
     }
-  };
+
+    // Recargar empleados después de la eliminación
+    await leerEmpleados();
+    alert("Empleado eliminado con éxito.");
+  } catch (error) {
+    console.error("Error al eliminar empleado:", error);
+    alert("No se pudo eliminar el empleado.");
+  }
+};
 
 const agregarEmpleado = async () => {
   const empleadoData = new FormData();

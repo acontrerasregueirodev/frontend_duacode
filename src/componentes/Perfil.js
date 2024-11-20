@@ -3,14 +3,16 @@ import useFetchData from './useFetchData';
 import EditarPerfil from './EditarPerfil';
 import '../styles/Perfil.css'
 
-// utils/csrfToken.js
-export const getCsrfToken = () => {
-    const name = 'csrftoken';
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+// // utils/csrfToken.js
+// export const getCsrfToken = () => {
+//     const name = 'csrftoken';
+//     const value = `; ${document.cookie}`;
+//     const parts = value.split(`; ${name}=`);
+//     if (parts.length === 2) return parts.pop().split(';').shift();
+// };
+const getCsrfToken = () => {
+  return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
 };
-
 const Perfil = ({ id, setIsAuthenticated, onLogout }) => {
     const { data: employeeData, error, refetch } = useFetchData(`https://belami.pythonanywhere.com/api/empleados/${id}/`);
     const [isEditing, setIsEditing] = useState(false);
