@@ -9,7 +9,7 @@ const Organigrama = () => {
   useEffect(() => {
     const fetchEmpleados = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/empleados/");
+        const response = await axios.get("https://belami.pythonanywhere.com/api/empleados/");
         const data = response.data;
 
         // Ordenar empleados por rango (de mayor a menor)
