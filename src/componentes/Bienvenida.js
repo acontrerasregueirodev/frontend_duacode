@@ -10,6 +10,7 @@ const Bienvenida = () => {
     //test de vercel
     // Función para obtener el mensaje y el token CSRF
 const fetchWelcomeMessage = async () => {
+  console.log("welcome message")
   try {
     const response = await axios.get("https://belami.pythonanywhere.com/", {
       withCredentials: true, // Esto es necesario para enviar las cookies de CSRF
