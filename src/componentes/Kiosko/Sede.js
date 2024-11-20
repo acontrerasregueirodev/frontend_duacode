@@ -19,7 +19,7 @@ const getCsrfToken = () => {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfToken,
             },
-            // withCredentials: true, // Incluye cookies y credenciales
+            withCredentials: true, // Incluye cookies y credenciales
         });
 
         const data = response.data;
@@ -40,29 +40,23 @@ const getCsrfToken = () => {
         fetchSede();
     }, []);
 
-    const handleCheckLogin = async () => {
-        try {
-            const csrfToken = getCsrfToken();
+const handleCheckLogin = async () => {
+    try {
+        const csrfToken = getCsrfToken();
 
-            const response = await fetch('https://belami.pythonanywhere.com/auth/check_login/', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken,
-                },
-                credentials: 'include',
-            });
+        const response = await axios.get('https://belami.pythonanywhere.com/auth/check_login/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+            },
+            withCredentials: true, // Esto es equivalente a `credentials: 'include'`
+        });
 
-            if (!response.ok) {
-                throw new Error('Error al verificar el estado de la sesión');
-            }
-
-            const data = await response.json();
-            setLoginStatus(data.mensaje);
-        } catch (error) {
-            console.error('Error al verificar el estado de la sesión:', error.message);
-        }
-    };
+        setLoginStatus(response.data.mensaje);
+    } catch (error) {
+        console.error('Error al verificar el estado de la sesión:', error.message);
+    }
+};
 
     return (
         <div>

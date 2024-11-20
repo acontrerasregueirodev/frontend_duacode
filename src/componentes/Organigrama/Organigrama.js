@@ -1,27 +1,30 @@
-import React, { useEffect, useState } from "react";
-import Empleado from "./Empleado";
-import axios from "axios";
-import "../../styles/Organigrama/organigrama.css";
+import React, { useEffect, useState } from 'react';
+import Departamento from './Departamento';
+import axios from 'axios';
+import '../../styles/Organigrama/organigrama.css'; // Asegúrate de tener los estilos aquí.
 
 const Organigrama = () => {
   const [empleados, setEmpleados] = useState([]);
 
   useEffect(() => {
-    const fetchEmpleados = async () => {
+    const fetchDepartamentos = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/empleados/");
+        const response = await axios.get('https://belami.pythonanywhere.com/api/departamentos/');
         const data = response.data;
 
-        // Ordenar empleados por rango (de mayor a menor)
-        const empleadosOrdenados = data.sort((a, b) => b.rango - a.rango);
+        // Ordenar empleados dentro de cada departamento por rango (de mayor a menor).
+        const departamentosOrdenados = data.map((departamento) => ({
+          ...departamento,
+          empleados: departamento.empleados.sort((a, b) => b.rango - a.rango), // Supongamos que "rango" es un número mayor para cargos altos.
+        }));
 
-        setEmpleados(empleadosOrdenados);
+        setDepartamentos(departamentosOrdenados);
       } catch (error) {
-        console.error("Error al obtener los empleados:", error);
+        console.error('Error al obtener los departamentos:', error);
       }
     };
 
-    fetchEmpleados();
+    fetchDepartamentos();
   }, []);
 
   return (
