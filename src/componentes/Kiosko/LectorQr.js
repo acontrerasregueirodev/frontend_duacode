@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import './LectorQr.css';
 import Perfil from './Perfil';
+import axios from 'axios'
 
 const LectorQr = () => {
   const [username, setUsername] = useState("");
