@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/inicio.css';
-
+//Código de la cabecera
 const Header = ({ menuOpen, setMenuOpen, searchVisible, setSearchVisible, searchTerm, setSearchTerm }) => {
   return (
     <header className={`header ${menuOpen ? "menu-open" : ""}`}>
