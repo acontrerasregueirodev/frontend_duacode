@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProtocoloCategoria from './ProtocoloCategoria';
-import '../../styles/Protocolos/protocolos.css'; // Asegúrate de tener los estilos aquí.
+import '../../styles/Protocolos/protocolos.css';
 
 const Protocolos = () => {
   const [categorias, setCategorias] = useState([]);
@@ -46,10 +46,9 @@ const Protocolos = () => {
     setCategorias(data);
   }, []);
 
-  // Función para manejar la carga de archivos
-  const handleFileUploadSuccess = (categoriaIndex, protocoloIndex, newFile) => {
+  const handleDescripcionChange = (categoriaIndex, protocoloIndex, nuevaDescripcion) => {
     const updatedCategorias = [...categorias];
-    updatedCategorias[categoriaIndex].protocolos[protocoloIndex].enlace = newFile.url || ''; // Actualiza el enlace
+    updatedCategorias[categoriaIndex].protocolos[protocoloIndex].descripcion = nuevaDescripcion;
     setCategorias(updatedCategorias);
   };
 
@@ -57,12 +56,24 @@ const Protocolos = () => {
     <div className="protocolos-container">
       <h1>Protocolos de la Empresa</h1>
       {categorias.map((categoria, categoriaIndex) => (
-        <ProtocoloCategoria
-          key={categoriaIndex}
-          categoria={categoria}
-          categoriaIndex={categoriaIndex}
-          onFileUploadSuccess={handleFileUploadSuccess}
-        />
+        <div key={categoriaIndex} className="categoria">
+          <h2>{categoria.categoria}</h2>
+          {categoria.protocolos.map((protocolo, protocoloIndex) => (
+            <div key={protocolo.id} className="protocolo">
+              <h3>{protocolo.titulo}</h3>
+              <textarea
+                value={protocolo.descripcion}
+                onChange={(e) =>
+                  handleDescripcionChange(categoriaIndex, protocoloIndex, e.target.value)
+                }
+                className="descripcion-textarea"
+              />
+              <a href={protocolo.enlace} target="_blank" rel="noopener noreferrer">
+                {protocolo.enlace ? 'Ver Protocolo' : 'Sin enlace'}
+              </a>
+            </div>
+          ))}
+        </div>
       ))}
       <div className="file-upload">
         <input type="file" onChange={(e) => console.log('Archivo seleccionado:', e.target.files[0])} />
