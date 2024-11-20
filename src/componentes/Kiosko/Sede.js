@@ -19,7 +19,7 @@ const getCsrfToken = () => {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfToken,
             },
-            withCredentials: true, // Incluye cookies y credenciales
+            // withCredentials: true, // Incluye cookies y credenciales
         });
 
         const data = response.data;
