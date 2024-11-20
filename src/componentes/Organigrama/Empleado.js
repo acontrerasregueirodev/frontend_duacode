@@ -7,7 +7,7 @@ const Empleado = ({ empleado }) => {
   useEffect(() => {
     const fetchRoleName = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/roles/");
+        const response = await axios.get("https://belami.pythonanywhere.com/api/roles/");
         const roles = response.data;
 
         const role = roles.find((role) => role.id === empleado.rol);
