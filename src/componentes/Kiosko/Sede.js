@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import axios from axios
 const SedesList = () => {
     const [sede, setSede] = useState(null);  // Estado para almacenar una sola sede
     const [loginStatus, setLoginStatus] = useState(null);  // Estado para el estado de sesión
