@@ -64,6 +64,10 @@ const Protocolos = () => {
           onFileUploadSuccess={handleFileUploadSuccess}
         />
       ))}
+      <div className="file-upload">
+        <input type="file" onChange={(e) => console.log('Archivo seleccionado:', e.target.files[0])} />
+        <button onClick={() => console.log('Subir archivo')}>Subir Archivo</button>
+      </div>
     </div>
   );
 };

@@ -38,10 +38,7 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
       >
         Ver Documento
       </a>
-      <div className="file-upload">
-        <input type="file" onChange={handleFileChange} />
-        <button onClick={handleFileUpload}>Subir Archivo</button>
-      </div>
+      
     </div>
   );
 };
