@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Departamento from './Departamento';
+// import Departamento from './Departamento';
 import axios from 'axios';
 import '../../styles/Organigrama/organigrama.css'; // Asegúrate de tener los estilos aquí.
 

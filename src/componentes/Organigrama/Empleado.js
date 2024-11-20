@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Empleado from './Empleado';
 import axios from "axios";
 
 const Empleado = ({ empleado }) => {
