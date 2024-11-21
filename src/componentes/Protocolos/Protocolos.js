@@ -44,9 +44,9 @@ const Protocolos = () => {
   };
 
   return (
-    <div className="protocolos-container">
+    <div>
       <h1>Protocolos de la Empresa</h1>
-      <div className="protocolos-content">
+      <div className="protocolos-container">
         {protocolos.length > 0 ? (
           protocolos.map((protocolo, index) => (
             <div key={index} className="protocolo">
