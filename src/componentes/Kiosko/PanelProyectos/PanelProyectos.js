@@ -90,7 +90,7 @@ axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 
     const guardarEdicion = async () => {
         try {
-            const csrfToken = getCsrfToken();
+            // const csrfToken = getCsrfToken();
             const empleadosActualizados = empleadosSeleccionados; // Solo los IDs de los empleados seleccionados
             const updatedProyecto = {
                 ...proyectoEditado,
@@ -146,7 +146,7 @@ axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 
     const guardarNuevoProyecto = async () => {
         try {
-            const csrfToken = getCsrfToken();
+            // const csrfToken = getCsrfToken();
 
             await axios.post('https://belami.pythonanywhere.com/api/proyectos/', nuevoProyecto, {
                 withCredentials: true,
