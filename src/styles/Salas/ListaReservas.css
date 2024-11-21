@@ -1,0 +1,210 @@
+/* Contenedor principal */
+.reserva-container {
+  max-width: 1000px; /* Aumentado para ajustarse al nuevo diseño */
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow-y: auto;
+  height: auto;
+  font-family: "Arial", sans-serif;
+}
+
+/* Títulos principales */
+.titulo-principal {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.titulo-principal::after {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background-color: #28a745;
+  display: block;
+  margin: 10px auto;
+  border-radius: 2px;
+}
+
+/* Títulos secundarios */
+.titulo-secundario {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #555;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+/* Formulario */
+.formulario-reserva {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+  gap: 20px;
+}
+
+.formulario-reserva label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.formulario-reserva input[type="date"],
+.formulario-reserva input[type="time"],
+.formulario-reserva select {
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  background-color: #f9f9f9;
+}
+
+.formulario-reserva select[multiple] {
+  height: 100px;
+  background-color: #f9f9f9;
+}
+
+.botones-formulario {
+  grid-column: span 2; /* Los botones ocupan toda la fila */
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.boton-submit {
+  padding: 12px 25px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.boton-submit:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.boton-cancelar {
+  padding: 12px 25px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.boton-cancelar:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+/* Lista de reservas */
+.lista-reservas {
+  margin-top: 30px;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 20px;
+}
+
+.item-reserva {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-reserva strong {
+  font-size: 14px;
+  color: #333;
+}
+
+.acciones-reserva {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.boton-editar {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.boton-editar:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.boton-eliminar {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.boton-eliminar:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+/* Mensajes */
+.loading-message,
+.error-message {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #dc3545;
+  margin: 20px 0;
+}
+
+/* Diseño responsivo */
+@media (max-width: 1024px) {
+  .formulario-reserva {
+    grid-template-columns: 1fr;
+  }
+
+  .botones-formulario {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .lista-reservas {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+  }
+}
+
+@media (max-width: 768px) {
+  .lista-reservas {
+    grid-template-columns: 1fr; /* Una columna */
+  }
+}

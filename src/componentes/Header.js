@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate para redirigir
 import '../styles/inicio.css';
 
 const Header = ({ menuOpen, setMenuOpen, searchVisible, setSearchVisible, searchTerm, setSearchTerm }) => {
+  const navigate = useNavigate(); // Hook para navegación
+
   return (
     <header className={`header ${menuOpen ? "menu-open" : ""}`}>
       <div
@@ -16,10 +19,15 @@ const Header = ({ menuOpen, setMenuOpen, searchVisible, setSearchVisible, search
         <h1 className="brand-title">
           duacode<span className="highlight">.</span>
         </h1>
-        <icon></icon>
+      </div>
+      <div className="header-buttons">
+        {/* Botón para ir a la vista de login */}
+        <button className="login-button" onClick={() => navigate('/login')}>
+          Login
+        </button>
       </div>
     </header>
   );
 };
 
-export default Header; 
+export default Header;

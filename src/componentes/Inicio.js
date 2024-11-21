@@ -1,7 +1,5 @@
-// src/componentes/Inicio.js
-
 import React, { useState } from 'react';
-import { Link, Routes } from 'react-router-dom';  // Importa `Routes` de `react-router-dom`
+import { Link, Routes } from 'react-router-dom'; // Importa `Routes` de `react-router-dom`
 import { useTranslation } from 'react-i18next';
 import Rutas from '../Rutas.js'; // Importa las rutas desde el archivo independiente
 
@@ -29,7 +27,7 @@ function Inicio() {
             Panel UX<span className="highlight">.</span>
           </h1>
         </div>
-        
+
         <ul>
           <li><Link to="/inicio" onClick={toggleMenu}>{t('inicio')}</Link></li>
           <li><Link to="/detalleEmpleado" onClick={toggleMenu}>{t('empleados')}</Link></li>
@@ -49,14 +47,16 @@ function Inicio() {
         </div>
       </div>
 
-      {/* Main content */}
+      {/*link a login */}
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
         <header className={`header ${isSidebarOpen ? 'active' : ''}`}>
           <h1 className="brand-title">
-            duacode<span className="highlight">.</span>
+            <Link to="/login" className="header-link">
+              duacode<span className="highlight">.</span>
+            </Link>
           </h1>
         </header>
-        
+
         {/* Routing */}
         <div className="content">
           <Routes>{Rutas()}</Routes> {/* Renderiza las rutas aquí */}

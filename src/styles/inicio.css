@@ -1,4 +1,3 @@
-/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -172,6 +171,7 @@ body, html {
     padding: 15px 30px;
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Asegura que el logo y el botón estén en extremos opuestos */
     color: #ffffff;
     width: 100%;
     top: 0;
@@ -191,3 +191,33 @@ body, html {
     color: #ff009d;
 }
 
+/* Estilo del botón de Login */
+.login-button {
+    background-color: #ff009d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+    background-color: #e60088;
+    transform: scale(1.05);
+}
+
+.login-button:active {
+    background-color: #cc0077;
+    transform: scale(1);
+}
+.header-link {
+    text-decoration: none;
+    color: inherit; /* Mantiene el color del header */
+    transition: color 0.3s ease;
+}
+
+.header-link:hover {
+    color: #ff009d; /* Color rosado en hover */
+}
