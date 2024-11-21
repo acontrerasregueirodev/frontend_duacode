@@ -5,7 +5,7 @@ import Header from "../Header";
 import ProyectoGrid from "./ProyectoGrid";
 import LoadMoreButton from "../LoadMoreButton";
 import Spinner from "../Spinner";
-import VirtualKeyboard from "../VirtualKeyboard"; // Importa el teclado virtual
+import VirtualKeyboard from "../VirtualKeyboard";
 import "../../styles/proyectos/proyectos.css";
 
 const Proyectos = () => {
@@ -103,7 +103,7 @@ const Proyectos = () => {
             className="search-bar"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            onClick={handleSearchClick} // Maneja el clic en el campo de búsqueda
+            onClick={handleSearchClick}
           />
           <ProyectoGrid
             proyectos={filteredProyectos.slice(0, page * proyectosPorPagina)}

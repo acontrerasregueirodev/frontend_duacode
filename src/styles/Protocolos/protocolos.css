@@ -7,39 +7,34 @@
   padding: 20px;
   text-align: center;
   box-sizing: border-box;
-  min-height: 85vh; /* Establece altura mínima completa para asegurar que ocupe toda la pantalla */
+  min-height: 85vh;
   overflow-y: auto; 
 }
 
-/* Título de la sección */
 .protocolos-container h1 {
   font-size: 2.5em;
   color: #61368C;
   margin-bottom: 40px;
 }
 
-/* Contenedor de cada categoría */
 .protocolo-categoria {
   margin-bottom: 40px;
 }
 
-/* Título de cada categoría */
 .protocolo-categoria h2 {
   font-size: 2em;
   color: #ff009d;
   margin-bottom: 20px;
 }
 
-/* Grid de protocolos dentro de una categoría */
 .protocolo-grid {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
-  width: 100%; /* Asegura que el grid ocupe todo el ancho disponible */
+  width: 100%; 
 }
 
-/* Tarjeta de protocolo */
 .protocolo-card {
   background-color: #fff;
   border-radius: 10px;
@@ -51,27 +46,23 @@
   cursor: pointer;
 }
 
-/* Efecto hover para las tarjetas */
 .protocolo-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Título del protocolo */
 .protocolo-card h3 {
   font-size: 1.5em;
   color: #333;
   margin-bottom: 10px;
 }
 
-/* Descripción del protocolo */
 .protocolo-card p {
   font-size: 1.1em;
   color: #666;
   margin-bottom: 15px;
 }
 
-/* Enlace para ver el documento */
 .protocolo-enlace {
   display: inline-block;
   padding: 10px 20px;
@@ -82,45 +73,41 @@
   transition: background-color 0.3s ease;
 }
 
-/* Efecto hover en el enlace */
 .protocolo-enlace:hover {
   background-color: #ff66b3;
 }
 
-/* Estilos para el formulario de carga de archivos */
 .file-upload {
-  margin-top: 80px;  /* Aumenta el espacio de separación entre protocolos y formulario */
+  margin-top: 80px; 
   padding: 20px;
   background-color: #f7f7f7;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
-  max-width: 500px; /* Limita el ancho máximo para no desbordar */
+  width: 100%; 
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
   display: block;
-  box-sizing: border-box; /* Asegura que el padding no sobrecargue el ancho */
+  box-sizing: border-box; 
 }
 
-/* Título del formulario de carga de archivos */
+
 .file-upload h4 {
   font-size: 2em;
   color: #61368C;
   margin-bottom: 20px;
 }
 
-/* Estilo de los inputs de carga */
 .file-upload input[type="file"] {
   margin-bottom: 15px;
   padding: 10px;
   font-size: 1em;
   border: 2px solid #ddd;
   border-radius: 5px;
-  width: 100%; /* Asegura que el campo de archivo ocupe todo el ancho disponible */
+  width: 100%; 
 }
 
-/* Estilo del campo de descripción */
 .file-upload input[type="text"] {
   margin-bottom: 20px;
   padding: 10px;
@@ -131,7 +118,6 @@
   max-width: 400px;
 }
 
-/* Estilo del botón de envío */
 .file-upload button {
   padding: 10px 20px;
   background-color: #ff009d;

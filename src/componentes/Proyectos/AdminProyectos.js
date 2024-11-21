@@ -195,7 +195,6 @@ const Proyectos = () => {
         </ul>
       )}
 
-      {/* Modal para editar o crear proyecto */}
       {(modalVisible || modalNuevoProyectoVisible) && (
         <div className="modal">
           <div className="modal-content">

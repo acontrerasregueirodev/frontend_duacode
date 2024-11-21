@@ -1,7 +1,7 @@
 import React from 'react';
 import PerfilUsuario from './PerfilUsuario';
 import Preferencias from './PreferenciasUsuario';
-import '../../styles/configuracion.css'; // Asegúrate de tener los estilos necesarios aquí.
+import '../../styles/configuracion.css'; 
 
 const Configuracion = () => {
   return (

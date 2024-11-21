@@ -5,7 +5,6 @@ import { initReactI18next } from 'react-i18next';
 import translationES from './locales/es/translation.json';
 import translationEN from './locales/en/translation.json';
 
-// Configuramos i18next
 i18n
   .use(initReactI18next) // Conectar i18next con React
   .init({

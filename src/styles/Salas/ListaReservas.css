@@ -1,6 +1,5 @@
-/* Contenedor principal */
 .reserva-container {
-  max-width: 1000px; /* Aumentado para ajustarse al nuevo diseño */
+  max-width: 1000px;
   margin: 30px auto;
   padding: 20px;
   background-color: #ffffff;
@@ -11,7 +10,6 @@
   font-family: "Arial", sans-serif;
 }
 
-/* Títulos principales */
 .titulo-principal {
   text-align: center;
   font-size: 28px;
@@ -31,7 +29,6 @@
   border-radius: 2px;
 }
 
-/* Títulos secundarios */
 .titulo-secundario {
   text-align: center;
   font-size: 22px;
@@ -41,10 +38,9 @@
   margin-bottom: 20px;
 }
 
-/* Formulario */
 .formulario-reserva {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
@@ -72,7 +68,7 @@
 }
 
 .botones-formulario {
-  grid-column: span 2; /* Los botones ocupan toda la fila */
+  grid-column: span 2;
   display: flex;
   justify-content: center;
   gap: 15px;
@@ -111,13 +107,12 @@
   transform: scale(1.05);
 }
 
-/* Lista de reservas */
 .lista-reservas {
   margin-top: 30px;
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -176,7 +171,6 @@
   transform: scale(1.05);
 }
 
-/* Mensajes */
 .loading-message,
 .error-message {
   text-align: center;
@@ -186,7 +180,6 @@
   margin: 20px 0;
 }
 
-/* Diseño responsivo */
 @media (max-width: 1024px) {
   .formulario-reserva {
     grid-template-columns: 1fr;
@@ -199,12 +192,12 @@
   }
 
   .lista-reservas {
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
   .lista-reservas {
-    grid-template-columns: 1fr; /* Una columna */
+    grid-template-columns: 1fr;
   }
 }

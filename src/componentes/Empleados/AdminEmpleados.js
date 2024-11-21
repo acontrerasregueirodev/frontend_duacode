@@ -10,7 +10,7 @@ const getCsrfToken = () => {
 
 const PanelEmpleados = () => {
   const [empleados, setEmpleados] = useState([]);
-  const [roles, setRoles] = useState([]); // New state for roles
+  const [roles, setRoles] = useState([]); 
   const [nuevoEmpleado, setNuevoEmpleado] = useState({
     id: null,
     nombre: "",
@@ -41,7 +41,6 @@ const PanelEmpleados = () => {
     }
   };
 
-  // Fetch roles from the API
   const leerRoles = async () => {
     try {
       const response = await fetch(ROLES_URL);
@@ -55,7 +54,7 @@ const PanelEmpleados = () => {
 
   useEffect(() => {
     leerEmpleados();
-    leerRoles(); // Fetch roles when the component mounts
+    leerRoles(); 
   }, []);
 
   const eliminarEmpleado = async (empleadoId) => {

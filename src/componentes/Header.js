@@ -21,7 +21,6 @@ const Header = ({ menuOpen, setMenuOpen, searchVisible, setSearchVisible, search
         </h1>
       </div>
       <div className="header-buttons">
-        {/* Botón para ir a la vista de login */}
         <button className="login-button" onClick={() => navigate('/login')}>
           Login
         </button>

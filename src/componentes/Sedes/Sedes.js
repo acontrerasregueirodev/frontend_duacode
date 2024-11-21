@@ -26,22 +26,22 @@ const Sedes = () => {
     fetchSedes();
   }, []);
 
-  if (loading) return <p>{t('mensajes.cargandoSedes')}</p>; // Mensaje de carga traducido
-  if (error) return <p>{t('mensajes.errorCargarSedes')}: {error}</p>; // Mensaje de error traducido
+  if (loading) return <p>{t('mensajes.cargandoSedes')}</p>; 
+  if (error) return <p>{t('mensajes.errorCargarSedes')}: {error}</p>; 
 
   return (
     <div className="sedes-container">
-      <MovingBar /> {/* Barra en movimiento */}
+      <MovingBar />
       
       <div className="sedes-grid">
         {sedes.length > 0 ? (
-          sedes.map(sede => <SedeCard key={sede.id} sede={sede} />) // Reutiliza el componente SedeCard para cada sede
+          sedes.map(sede => <SedeCard key={sede.id} sede={sede} />)
         ) : (
-          <p>{t('mensajes.noSedesDisponibles')}</p> // Mensaje de no hay sedes traducido
+          <p>{t('mensajes.noSedesDisponibles')}</p> 
         )}
       </div>
 
-      <Footer /> {/* Pie de página */}
+      <Footer /> 
     </div>
   );
 };

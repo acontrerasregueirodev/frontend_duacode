@@ -77,7 +77,7 @@ const ListaReservas = () => {
       });
 
     axios
-      .get("/api/sedes/salas") // Obtener las salas disponibles
+      .get("/api/sedes/salas") 
       .then((respuesta) => {
         setSalas(respuesta.data);
       })
@@ -135,7 +135,7 @@ const ListaReservas = () => {
       hora_inicio: datosFormulario.get("hora_inicio"),
       hora_fin: datosFormulario.get("hora_fin"),
       empleados_asistentes: empleadosAsistentesIds,
-      sala: datosFormulario.get("sala"), // Obtener el ID de la sala seleccionada
+      sala: datosFormulario.get("sala"),
     };
 
     try {
@@ -160,7 +160,7 @@ const ListaReservas = () => {
           reserva.id === reservaParaEditar.id
             ? {
                 ...reservaActualizada,
-                empleados_asistentes: asistentesCompletos, // Actualizamos los asistentes con los nombres
+                empleados_asistentes: asistentesCompletos, 
               }
             : reserva
         )
@@ -185,7 +185,7 @@ const ListaReservas = () => {
       hora_inicio: datosFormulario.get("hora_inicio"),
       hora_fin: datosFormulario.get("hora_fin"),
       empleados_asistentes: empleadosAsistentesIds,
-      sala: datosFormulario.get("sala"), // Agregar el ID de la sala seleccionada
+      sala: datosFormulario.get("sala"), 
     };
 
     try {

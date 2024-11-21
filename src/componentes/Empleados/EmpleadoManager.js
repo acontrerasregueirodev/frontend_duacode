@@ -205,7 +205,7 @@ const EmpleadoManager = () => {
           <li key={empleado.id}>
             {empleado.foto && (
               <img
-                src={`${empleado.foto}`} // Cambia la URL según tu configuración
+                src={`${empleado.foto}`} 
                 alt={`${empleado.nombre} ${empleado.apellido_1}`}
                 style={{ width: "50px", height: "50px", marginRight: "10px" }} // Estilo para la imagen
               />

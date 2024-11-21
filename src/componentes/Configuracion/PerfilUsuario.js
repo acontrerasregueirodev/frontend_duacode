@@ -7,7 +7,6 @@ const PerfilUsuario = () => {
 
   const handleGuardarCambios = (e) => {
     e.preventDefault();
-    // Lógica para guardar los cambios
     alert('Cambios guardados');
   };
 
