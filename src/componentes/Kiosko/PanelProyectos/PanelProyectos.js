@@ -64,13 +64,16 @@ const Proyectos = () => {
     };
 
 const eliminarProyecto = async (id) => {
-    try {
-        // Obtener el token CSRF desde las cookies
-        const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
-        if (csrfToken) {
-            // Establecer el CSRF token en los encabezados
-            axios.defaults.headers.common['X-CSRFToken'] = csrfToken[1];
-        } else {
+  try {
+    const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
+    if (csrfToken) {
+      await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
+        withCredentials: true,
+        headers: {
+          'X-CSRFToken': csrfToken[1]
+        }
+      });
+    } else {
             console.error("CSRF token no encontrado");
         }
 
