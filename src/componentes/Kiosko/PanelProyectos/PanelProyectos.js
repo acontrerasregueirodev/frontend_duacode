@@ -5,16 +5,11 @@ import './PanelProyectos.css';
 // Configuración global de axios
 axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
 
-// Aseguramos que el token CSRF esté presente en todas las solicitudes
-const csrfToken = document.cookie
-    .split('; ')
-    .find(row => row.startsWith('csrftoken='))
-    ?.split('=')[1];
-
-// Si se encuentra el token, lo agregamos a las cabeceras de axios
-if (csrfToken) {
-    axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
-}
+// Función para obtener el token CSRF desde las cookies
+const getCsrfToken = () => {
+    const match = document.cookie.match(/csrftoken=([\w-]+)/);
+    return match ? match[1] : null;
+};
 
 const Proyectos = () => {
     const [proyectos, setProyectos] = useState([]);
@@ -58,9 +53,7 @@ const Proyectos = () => {
 
     const eliminarProyecto = async (id) => {
         try {
-            const csrfToken = document.cookie
-                .split('; ')
-                .find(row => row.startsWith('csrftoken='))?.split('=')[1];
+            const csrfToken = getCsrfToken();
 
             await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
                 withCredentials: true,
@@ -84,10 +77,7 @@ const Proyectos = () => {
 
     const guardarEdicion = async () => {
         try {
-            const csrfToken = document.cookie
-                .split('; ')
-                .find(row => row.startsWith('csrftoken='))?.split('=')[1];
-
+            const csrfToken = getCsrfToken();
             const empleadosActualizados = empleadosSeleccionados; // Solo los IDs de los empleados seleccionados
             const updatedProyecto = {
                 ...proyectoEditado,
@@ -143,9 +133,7 @@ const Proyectos = () => {
 
     const guardarNuevoProyecto = async () => {
         try {
-            const csrfToken = document.cookie
-                .split('; ')
-                .find(row => row.startsWith('csrftoken='))?.split('=')[1];
+            const csrfToken = getCsrfToken();
 
             await axios.post('https://belami.pythonanywhere.com/api/proyectos/', nuevoProyecto, {
                 withCredentials: true,
@@ -291,7 +279,7 @@ const Proyectos = () => {
             {modalNuevoProyectoVisible && (
                 <div className="modal">
                     <div className="modal-content">
-                        <h3>Nuevo Proyecto</h3>
+                        <h3>Crear Nuevo Proyecto</h3>
                         <label>
                             Nombre del Proyecto:
                             <input
@@ -323,39 +311,12 @@ const Proyectos = () => {
                             <input
                                 type="date"
                                 name="fecha_fin"
-                                value={nuevoProyecto.fecha_fin || ''}
+                                value={nuevoProyecto.fecha_fin}
                                 onChange={handleNuevoProyectoChange}
                             />
                         </label>
 
-                        <div className="empleados-no-asignados">
-                            <h4>Empleados</h4>
-                            {empleados.map((empleado) => (
-                                <div key={empleado.id}>
-                                    <input
-                                        type="checkbox"
-                                        id={`empleado-${empleado.id}`}
-                                        checked={nuevoProyecto.empleados.includes(empleado.id)}
-                                        onChange={(e) => {
-                                            if (e.target.checked) {
-                                                setNuevoProyecto({
-                                                    ...nuevoProyecto,
-                                                    empleados: [...nuevoProyecto.empleados, empleado.id]
-                                                });
-                                            } else {
-                                                setNuevoProyecto({
-                                                    ...nuevoProyecto,
-                                                    empleados: nuevoProyecto.empleados.filter(id => id !== empleado.id)
-                                                });
-                                            }
-                                        }}
-                                    />
-                                    <label htmlFor={`empleado-${empleado.id}`}>{empleado.nombre} {empleado.apellido_1}</label>
-                                </div>
-                            ))}
-                        </div>
-
-                        <button onClick={guardarNuevoProyecto}>Crear Proyecto</button>
+                        <button onClick={guardarNuevoProyecto}>Guardar nuevo proyecto</button>
                         <button onClick={() => setModalNuevoProyectoVisible(false)}>Cancelar</button>
                     </div>
                 </div>
