@@ -18,7 +18,6 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
         body: formData,
       });
       const result = await response.json();
-
       onFileUploadSuccess({ ...protocolo, enlace: result.url, descripcion: result.descripcion });
     } catch (error) {
       console.error('Error al subir el archivo:', error);

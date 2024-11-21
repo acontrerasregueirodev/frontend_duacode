@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ProtocoloCard from './ProtocoloCard';  
-import FileUpload from '../Kiosko/FileUpload';  
 import '../../styles/Protocolos/protocolos.css';
 
 const Protocolos = () => {
@@ -50,8 +49,6 @@ const Protocolos = () => {
       ) : (
         <p>No hay protocolos disponibles.</p>
       )}
-
-      <FileUpload onFileUploadSuccess={handleFileUploadSuccess} />
     </div>
   );
 };
