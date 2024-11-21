@@ -9,46 +9,51 @@ const Protocolos = () => {
     fetch('https://belami.pythonanywhere.com/upload/')
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Error en la respuesta de la red');
         }
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new Error('Expected JSON response, but got something else');
-        }
-        return response.json();
+        return response.text(); // Obtener el HTML como texto
       })
-      .then((data) => {
+      .then((html) => {
+        // Parsear el HTML para extraer los datos necesarios
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Selecciona las filas que contienen los protocolos
+        const rows = [...doc.querySelectorAll('div')].filter((div) =>
+          div.textContent.includes('Nombre:')
+        );
+
+        // Extraer datos de cada fila
+        const data = rows.map((row) => {
+          const nombre = row.textContent.match(/Nombre:\s(.+?)\n/)[1];
+          const descripcion = row.textContent.match(/Descripción:\s(.+?)\n/)[1];
+          const fecha = row.textContent.match(/Subido el:\s(.+)/)[1];
+          return { nombre, descripcion, fecha };
+        });
+
         setProtocolos(data);
       })
       .catch((error) => {
         console.error('Error al obtener los protocolos:', error);
       });
   }, []);
-  
-
-  const handleFileUploadSuccess = (newFile) => {
-    setProtocolos((prevProtocolos) => [
-      ...prevProtocolos,
-      {
-        titulo: newFile.name,
-        descripcion: newFile.descripcion || '', 
-        enlace: newFile.url || '', 
-      }
-    ]);
-  };
 
   return (
     <div className="protocolos-container">
       <h1>Protocolos de la Empresa</h1>
-      
       {protocolos.length > 0 ? (
         protocolos.map((protocolo, index) => (
           <div key={index} className="protocolo">
             <h2>{protocolo.nombre}</h2>
             <p>{protocolo.descripcion}</p>
-            {protocolo.enlace && (
-              <a href={protocolo.enlace} target="_blank" rel="noopener noreferrer">
-                Ver Protocolo
+            <p><strong>Subido el:</strong> {protocolo.fecha}</p>
+            {protocolo.nombre.startsWith('uploaded_files/') && (
+              <a
+                href={`https://belami.pythonanywhere.com/${protocolo.nombre}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver Documento
               </a>
             )}
           </div>
@@ -57,7 +62,16 @@ const Protocolos = () => {
         <p>No hay protocolos disponibles.</p>
       )}
 
-      <FileUpload onFileUploadSuccess={handleFileUploadSuccess} />
+      <FileUpload onFileUploadSuccess={(newFile) => {
+        setProtocolos((prev) => [
+          ...prev,
+          {
+            nombre: `uploaded_files/${newFile.name}`,
+            descripcion: newFile.descripcion || '',
+            fecha: new Date().toLocaleString(),
+          },
+        ]);
+      }} />
     </div>
   );
 };
