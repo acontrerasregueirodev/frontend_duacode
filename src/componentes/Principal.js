@@ -1,5 +1,7 @@
+// Principal.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "./Header";
 import "../styles/Principal.css";
 
 function Principal() {
@@ -7,22 +9,37 @@ function Principal() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [roleName, setRoleName] = useState("");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    try {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (err) {
+      console.error("Error al leer el usuario de localStorage:", err);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchEmpleadoDetail = async () => {
+      if (!user) return;
+
       try {
-        const id = 2;
+        const id = user.id || 2; // Valor predeterminado
         const response = await axios.get(`https://belami.pythonanywhere.com/api/empleados/${id}`);
         setEmpleadoDetail(response.data);
       } catch (err) {
-        setError(`Error: ${err.message}`);
+        console.error("Error al obtener los detalles del empleado:", err);
+        setError(`Error al cargar datos: ${err.message}`);
       } finally {
         setLoading(false);
       }
     };
 
     fetchEmpleadoDetail();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const fetchRoleName = async () => {
@@ -47,21 +64,14 @@ function Principal() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="main">
-      <div className="header">
-        <h1>duacode<span>.</span></h1>
-        <div className="icons">
-          <span className="icon-bell">🔔</span>
-          <span className="icon-login">→</span>
-        </div>
-      </div>
-
+    <div>
+      <Header />
       <div className="content">
-        <h2>Bienvenido {empleadoDetail?.nombre}</h2>
+        <h2>Bienvenido {user?.nombre || "Usuario"}</h2>
         <div className="user-icon">
           <img
-            src={empleadoDetail?.foto || "ruta/a/imagen-predeterminada.jpg"}
-            alt={`${empleadoDetail?.nombre} ${empleadoDetail?.apellido_1}`}
+            src={empleadoDetail?.foto || "foto del empleado"}
+            alt={`${empleadoDetail?.nombre || "Nombre"} ${empleadoDetail?.apellido_1 || "Apellido"}`}
             onError={(e) => (e.target.src = "ruta/a/imagen-predeterminada.jpg")}
           />
         </div>

@@ -1,7 +1,7 @@
 // Login.js
 import React, { useEffect, useRef, useState } from "react";
-import '../styles/Login.css';
-import Perfil from './Perfil';
+import "../styles/Login.css";
+import Perfil from "./Perfil";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -9,9 +9,9 @@ const Login = () => {
   const [csrfToken, setCsrfToken] = useState("");
   const [welcomeMessage, setWelcomeMessage] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [qrScanned, setQrScanned] = useState(false); 
-  const [showQrModal, setShowQrModal] = useState(false);  // Modal para confirmar uso de QR
-  const [showVideoPreview, setShowVideoPreview] = useState(false); // Mostrar vista previa de cámara
+  const [qrScanned, setQrScanned] = useState(false);
+  const [showQrModal, setShowQrModal] = useState(false);
+  const [showVideoPreview, setShowVideoPreview] = useState(false);
   const videoRef = useRef(null);
   const videoStreamRef = useRef(null);
 
@@ -66,7 +66,7 @@ const Login = () => {
 
     return () => {
       if (videoStreamRef.current) {
-        videoStreamRef.current.getTracks().forEach(track => track.stop());
+        videoStreamRef.current.getTracks().forEach((track) => track.stop());
       }
       document.body.removeChild(script);
     };
@@ -76,22 +76,23 @@ const Login = () => {
     if (e) e.preventDefault();
 
     try {
-      const response = await fetch('https://belami.pythonanywhere.com/auth/login/', {
-        method: 'POST',
+      const response = await fetch("https://belami.pythonanywhere.com/auth/login/", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'X-CSRFToken': csrfToken,
+          "Content-Type": "application/x-www-form-urlencoded",
+          "X-CSRFToken": csrfToken,
         },
         body: new URLSearchParams({
           username: username,
           password: password,
         }),
-        credentials: 'include',
+        credentials: "include",
       });
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('token', data.token);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
         setWelcomeMessage(data.message);
         setIsAuthenticated(true);
       } else {
@@ -106,7 +107,7 @@ const Login = () => {
 
   useEffect(() => {
     if (qrScanned && username && password) {
-      handleSubmit(); // Autenticación automática al escanear el QR
+      handleSubmit();
     }
   }, [qrScanned, username, password]);
 
@@ -115,20 +116,20 @@ const Login = () => {
     setUsername("");
     setPassword("");
     setWelcomeMessage("");
-    setQrScanned(false); 
-    setShowVideoPreview(false); // Ocultar vista previa
+    setQrScanned(false);
+    setShowVideoPreview(false);
     if (videoStreamRef.current) {
-      videoStreamRef.current.getTracks().forEach(track => track.stop());
+      videoStreamRef.current.getTracks().forEach((track) => track.stop());
     }
   };
 
   const handleQrLogin = () => {
-    setShowQrModal(true); // Mostrar confirmación de QR
+    setShowQrModal(true);
   };
 
   const confirmQrLogin = () => {
     setShowQrModal(false);
-    setShowVideoPreview(true); // Iniciar vista previa del video
+    setShowVideoPreview(true);
   };
 
   if (isAuthenticated && welcomeMessage) {
