@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './PanelProyectos.css';
+
+// Configuración global de axios
 axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
+
+// Aseguramos que el token CSRF esté presente en todas las solicitudes
+axios.defaults.headers.common['X-CSRFToken'] = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('csrftoken='))
+    ?.split('=')[1];
 
 const Proyectos = () => {
     const [proyectos, setProyectos] = useState([]);
@@ -268,7 +276,7 @@ const Proyectos = () => {
                             ))}
                         </div>
 
-                        <button onClick={guardarEdicion}>Guardar Cambios</button>
+                        <button onClick={guardarEdicion}>Guardar cambios</button>
                         <button onClick={() => setModalVisible(false)}>Cancelar</button>
                     </div>
                 </div>
@@ -278,7 +286,7 @@ const Proyectos = () => {
             {modalNuevoProyectoVisible && (
                 <div className="modal">
                     <div className="modal-content">
-                        <h3>Crear Nuevo Proyecto</h3>
+                        <h3>Nuevo Proyecto</h3>
                         <label>
                             Nombre del Proyecto:
                             <input
@@ -310,7 +318,7 @@ const Proyectos = () => {
                             <input
                                 type="date"
                                 name="fecha_fin"
-                                value={nuevoProyecto.fecha_fin}
+                                value={nuevoProyecto.fecha_fin || ''}
                                 onChange={handleNuevoProyectoChange}
                             />
                         </label>
@@ -324,10 +332,17 @@ const Proyectos = () => {
                                         id={`empleado-${empleado.id}`}
                                         checked={nuevoProyecto.empleados.includes(empleado.id)}
                                         onChange={(e) => {
-                                            const updatedEmpleados = e.target.checked
-                                                ? [...nuevoProyecto.empleados, empleado.id]
-                                                : nuevoProyecto.empleados.filter(id => id !== empleado.id);
-                                            setNuevoProyecto({ ...nuevoProyecto, empleados: updatedEmpleados });
+                                            if (e.target.checked) {
+                                                setNuevoProyecto({
+                                                    ...nuevoProyecto,
+                                                    empleados: [...nuevoProyecto.empleados, empleado.id]
+                                                });
+                                            } else {
+                                                setNuevoProyecto({
+                                                    ...nuevoProyecto,
+                                                    empleados: nuevoProyecto.empleados.filter(id => id !== empleado.id)
+                                                });
+                                            }
                                         }}
                                     />
                                     <label htmlFor={`empleado-${empleado.id}`}>{empleado.nombre} {empleado.apellido_1}</label>
