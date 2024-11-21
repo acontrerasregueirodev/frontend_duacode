@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../../styles/Protocolos/protocolos.css';
 
 const Protocolos = () => {
   const [protocolos, setProtocolos] = useState([]);
@@ -47,7 +48,7 @@ const Protocolos = () => {
             <p><strong>Subido el:</strong> {protocolo.fecha}</p>
             {protocolo.nombre.startsWith('uploaded_files/') && (
               <a
-                href={`https://belami.pythonanywhere.com/${protocolo.nombre}`}
+                href={`https://belami.pythonanywhere.com/media/${protocolo.nombre}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
