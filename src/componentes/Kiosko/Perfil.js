@@ -5,10 +5,7 @@ import './Perfil.css';
 
 // Función para obtener el token CSRF
 const obtenerCsrfToken = () => {
-    const csrfCookie = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
-    const csrfToken = csrfCookie ? csrfCookie.split('=')[1] : null;
-    console.log("Token CSRF obtenido en obtenerCsrfToken:", csrfToken);
-    return csrfToken;
+    return window.csrfToken;
 };
 
 const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
