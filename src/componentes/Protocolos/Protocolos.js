@@ -44,28 +44,30 @@ const Protocolos = () => {
   };
 
   return (
-    <div className="protocolos-container">
+    <div>
       <h1>Protocolos de la Empresa</h1>
-      {protocolos.length > 0 ? (
-        protocolos.map((protocolo, index) => (
-          <div key={index} className="protocolo">
-            <h2>{protocolo.nombre}</h2>
-            <p>{protocolo.descripcion}</p>
-            <p><strong>Subido el:</strong> {protocolo.fecha}</p>
-            {protocolo.nombre.startsWith('uploaded_files/') && (
-              <a
-                href={`https://belami.pythonanywhere.com/media/${protocolo.nombre}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver Documento
-              </a>
-            )}
-          </div>
-        ))
-      ) : (
-        <p>No hay protocolos disponibles.</p>
-      )}
+      <div className="protocolos-container">
+        {protocolos.length > 0 ? (
+          protocolos.map((protocolo, index) => (
+            <div key={index} className="protocolo">
+              <h2>{protocolo.nombre}</h2>
+              <p>{protocolo.descripcion}</p>
+              <p><strong>Subido el:</strong> {protocolo.fecha}</p>
+              {protocolo.nombre.startsWith('uploaded_files/') && (
+                <a
+                  href={`https://belami.pythonanywhere.com/media/${protocolo.nombre}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver Documento
+                </a>
+              )}
+            </div>
+          ))
+        ) : (
+          <p>No hay protocolos disponibles.</p>
+        )}
+      </div>
 
       <FileUpload onFileUploadSuccess={handleFileUploadSuccess} />
     </div>
