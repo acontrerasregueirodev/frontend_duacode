@@ -1,12 +1,15 @@
 .protocolos-container {
-  margin: 200px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .protocolo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; /* Add space between items */
-  justify-content: center;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -16,7 +19,7 @@
   max-width: 500px;
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  flex-grow: 1; /* Allow protocol boxes to grow */
+  flex-grow: 1;
 }
 
 .protocolo:hover {
@@ -59,21 +62,4 @@
   pointer-events: none;
   color: #ccc;
   text-decoration: none;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .protocolo {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .protocolo h2 {
-    font-size: 1.5em;
-  }
-
-  .protocolo p {
-    font-size: 1em;
-  }
 }
