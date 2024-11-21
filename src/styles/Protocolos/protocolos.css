@@ -1,38 +1,79 @@
-.file-upload {
-  margin-top: 20px;
+.protocolos-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
   padding: 20px;
-  background-color: #f7f7f7;
-  border-radius: 8px;
+  box-sizing: border-box;
+  min-height: 85vh;
+  overflow-y: auto;
+}
+
+.protocolos-container h1 {
+  font-size: 2.5em;
+  color: #61368C;
+  margin-bottom: 40px;
+}
+
+.protocolo-card {
+  background-color: #fff;
+  border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  padding: 20px;
   width: 100%;
   max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  box-sizing: border-box;
+  margin-bottom: 20px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.file-upload input[type="file"] {
+.protocolo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.protocolo-card h3 {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.protocolo-card p {
+  font-size: 1.2em;
+  color: #666;
   margin-bottom: 15px;
-  padding: 10px;
-  font-size: 1em;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  width: 100%;
 }
 
-.file-upload button {
+.protocolo-card .protocolo-fecha {
+  font-size: 1.1em;
+  color: #999;
+  margin-bottom: 15px;
+}
+
+.protocolo-card .protocolo-enlace {
+  display: inline-block;
   padding: 10px 20px;
   background-color: #ff009d;
   color: #fff;
-  font-size: 1.1em;
-  border: none;
   border-radius: 5px;
-  cursor: pointer;
+  text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
-.file-upload button:hover {
+.protocolo-card .protocolo-enlace:hover {
   background-color: #ff66b3;
+}
+
+.protocolo-card .protocolo-enlace.disabled {
+  pointer-events: none;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.protocolos-container .no-protocolos {
+  font-size: 1.5em;
+  color: #666;
+  margin-top: 20px;
+  font-weight: 500;
 }
