@@ -9,6 +9,7 @@ if (csrfToken) {
 } else {
     console.error("CSRF token no encontrado");
 }
+axios.defaults.headers.common['Authorization'] = '';  // Elimina cualquier valor de Authorization
 axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
 
