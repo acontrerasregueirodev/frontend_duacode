@@ -6,7 +6,7 @@ const Protocolos = () => {
   const [protocolos, setProtocolos] = useState([]);
 
   useEffect(() => {
-    fetch('https://belami.pythonanywhere.com/media/')
+    fetch('https://belami.pythonanywhere.com/upload/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
