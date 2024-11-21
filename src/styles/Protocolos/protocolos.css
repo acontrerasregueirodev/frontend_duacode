@@ -63,3 +63,19 @@
   color: #ccc;
   text-decoration: none;
 }
+
+@media (max-width: 768px) {
+  .protocolo {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .protocolo h2 {
+    font-size: 1.5em;
+  }
+
+  .protocolo p {
+    font-size: 1em;
+  }
+}
