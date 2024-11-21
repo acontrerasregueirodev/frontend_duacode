@@ -1,11 +1,12 @@
 .protocolos-container {
+  margin: 200px 0;
+}
+
+.protocolo {
   display: flex;
   flex-wrap: wrap;
   gap: 20px; /* Add space between items */
   justify-content: center;
-}
-
-.protocolo {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
