@@ -9,7 +9,7 @@ const getCsrfToken = () => {
 };
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-CSRFToken'] = getCsrfToken();  // Establecer token CSRF globalmente
-
+console.log(getCsrfToken())
 
 
 const PanelEmpleados = () => {
