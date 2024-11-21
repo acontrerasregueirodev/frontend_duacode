@@ -28,7 +28,7 @@ const Reserva = () => {
       try {
         const csrfToken = getCSRFToken();
         const reservasResponse = await axios.get(
-          `http://localhost:8000/api/sedes/reservas/`,
+          `https://belami.pythonanywhere.com/api/sedes/reservas/`,
           {
             withCredentials: true,
             headers: { "X-CSRFToken": csrfToken },
@@ -37,7 +37,7 @@ const Reserva = () => {
         setReservas(reservasResponse.data);
 
         const empleadosResponse = await axios.get(
-          `http://localhost:8000/api/empleados/`,
+          `https://belami.pythonanywhere.com/api/empleados/`,
           {
             withCredentials: true,
             headers: { "X-CSRFToken": csrfToken },
@@ -66,7 +66,7 @@ const Reserva = () => {
     try {
       const csrfToken = getCSRFToken();
       const response = await axios.post(
-        `http://localhost:8000/api/sedes/reservas/`,
+        `https://belami.pythonanywhere.com/api/sedes/reservas/`,
         nuevaReserva,
         {
           withCredentials: true,
@@ -97,7 +97,7 @@ const Reserva = () => {
     try {
       const csrfToken = getCSRFToken();
       const response = await axios.put(
-        `http://localhost:8000/api/sedes/reservas/${reservaParaEditar.id}/`,
+        `https://belami.pythonanywhere.com/api/sedes/reservas/${reservaParaEditar.id}/`,
         reservaActualizada,
         {
           withCredentials: true,
@@ -125,7 +125,7 @@ const Reserva = () => {
   const handleEliminar = async (id) => {
     try {
       const csrfToken = getCSRFToken();
-      await axios.delete(`http://localhost:8000/api/sedes/reservas/${id}/`, {
+      await axios.delete(`https://belami.pythonanywhere.com/api/sedes/reservas/${id}/`, {
         withCredentials: true,
         headers: { "X-CSRFToken": csrfToken },
       });
