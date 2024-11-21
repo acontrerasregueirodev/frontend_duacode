@@ -4,54 +4,38 @@ import '../../styles/Protocolos/protocolos.css';
 
 const Protocolos = () => {
   const [protocolos, setProtocolos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [nombre, setNombre] = useState(''); // Estado para el nombre del archivo
 
   useEffect(() => {
-    if (nombre) {
-      setLoading(true);
-      fetch(`https://belami.pythonanywhere.com/media/${nombre}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const contentType = response.headers.get("content-type");
-          if (!contentType || !contentType.includes("application/json")) {
-            throw new Error('Expected JSON response, but got something else');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setProtocolos(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          setError(error.message);
-          setLoading(false);
-        });
-    }
-  }, [nombre]);
+    fetch('https://belami.pythonanywhere.com/media/')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error('Expected JSON response, but got something else');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setProtocolos(data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener los protocolos:', error);
+      });
+  }, []);
+  
 
   const handleFileUploadSuccess = (newFile) => {
-    setNombre(newFile.name); // Asigna el nombre del archivo al estado
     setProtocolos((prevProtocolos) => [
       ...prevProtocolos,
       {
-        nombre: newFile.name,
+        titulo: newFile.name,
         descripcion: newFile.descripcion || '', 
         enlace: newFile.url || '', 
       }
     ]);
   };
-
-  if (loading) {
-    return <p>Loading protocols...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
 
   return (
     <div className="protocolos-container">
@@ -62,7 +46,6 @@ const Protocolos = () => {
           <div key={index} className="protocolo">
             <h2>{protocolo.nombre}</h2>
             <p>{protocolo.descripcion}</p>
-            <p><strong>Subido el:</strong> {new Date(protocolo.fecha_subida).toLocaleString()}</p>
             {protocolo.enlace && (
               <a href={protocolo.enlace} target="_blank" rel="noopener noreferrer">
                 Ver Protocolo
