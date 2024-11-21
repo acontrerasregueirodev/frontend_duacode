@@ -6,8 +6,17 @@ const Protocolos = () => {
   const [protocolos, setProtocolos] = useState([]);
 
   useEffect(() => {
-    fetch('https://belami.pythonanywhere.com/upload/')
-      .then((response) => response.json())
+    fetch('https://belami.pythonanywhere.com/media/')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error('Expected JSON response, but got something else');
+        }
+        return response.json();
+      })
       .then((data) => {
         setProtocolos(data);
       })
@@ -15,6 +24,7 @@ const Protocolos = () => {
         console.error('Error al obtener los protocolos:', error);
       });
   }, []);
+  
 
   const handleFileUploadSuccess = (newFile) => {
     setProtocolos((prevProtocolos) => [
@@ -34,7 +44,7 @@ const Protocolos = () => {
       {protocolos.length > 0 ? (
         protocolos.map((protocolo, index) => (
           <div key={index} className="protocolo">
-            <h2>{protocolo.titulo}</h2>
+            <h2>{protocolo.nombre}</h2>
             <p>{protocolo.descripcion}</p>
             {protocolo.enlace && (
               <a href={protocolo.enlace} target="_blank" rel="noopener noreferrer">
