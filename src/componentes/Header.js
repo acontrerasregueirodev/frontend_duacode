@@ -20,12 +20,6 @@ const Header = ({ menuOpen, setMenuOpen }) => {
         <h1 className="brand-title">
           duacode<span className="highlight">.</span>
         </h1>
-        <img
-          src={IconoLogin}
-          alt="Inicio de sesión"
-          className="icono-login"
-          onClick={() => navigate('https://duacode.vercel.app/login')} 
-        />
       </div>
     </header>
   );
