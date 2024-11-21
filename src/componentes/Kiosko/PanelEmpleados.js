@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './PanelEmpleados.css';
 import axios from 'axios'
-// Configurar axios globalmente para siempre enviar las credenciales
-// Función para obtener el token CSRF desde las cookies
-const getCsrfToken = () => {
-  const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
-  return csrfToken ? csrfToken.split('=')[1] : null;
-};
+
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-CSRFToken'] = getCsrfToken();  // Establecer token CSRF globalmente
-console.log(getCsrfToken())
 
 
 const PanelEmpleados = () => {
@@ -68,14 +62,35 @@ const PanelEmpleados = () => {
   useEffect(() => {
     leerEmpleados();
   }, []);
-axios.defaults.withCredentials = true;
+    const eliminarProyecto = async (id) => {
+        try {
+            const csrfToken = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('csrftoken='))?.split('=')[1];
 
+            await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
+                withCredentials: true,
+                headers: {
+                    'X-CSRFToken': csrfToken
+                }
+            });
+            setProyectos(proyectos.filter(proyecto => proyecto.id !== id));
+            alert('Proyecto eliminado exitosamente');
+        } catch (error) {
+            console.error("Error al eliminar el proyecto:", error);
+            alert('No se pudo eliminar el proyecto');
+        }
+    };
 const eliminarEmpleado = async (empleadoId) => {
   console.log(document.cookie); // Muestra las cookies para depuración
   console.log("token csrf :", getCsrfToken()); // Muestra el token CSRF
+  console.log("testeandop " ,getCsrfToken())
 
   try {
-    const csrfToken = getCsrfToken(); // Asegúrate de que esta función obtenga correctamente el token CSRF
+              const csrfToken = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('csrftoken='))?.split('=')[1];
+    // const csrfToken = getCsrfToken(); // Asegúrate de que esta función obtenga correctamente el token CSRF
 
     if (!csrfToken) {
       throw new Error('No se pudo obtener el token CSRF');

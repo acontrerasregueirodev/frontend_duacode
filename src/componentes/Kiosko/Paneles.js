@@ -14,7 +14,11 @@ const Paneles = () => {
         const sessionId = document.cookie.split('; ').find(row => row.startsWith('sessionid='));
         return sessionId ? sessionId.split('=')[1] : null;
     };
-
+        const mostrarTokens = () => {
+        const csrfToken = getCsrfToken();
+        const sessionId = getSessionId();
+        alert(`CSRF Token: ${csrfToken}\nSession ID: ${sessionId}`);
+  };
     const navigate = useNavigate(); // Obtén la función navigate
 
     const irProyectos = () => {
@@ -25,11 +29,7 @@ const Paneles = () => {
         navigate('/test/salas'); // Redirige al panel de salas
     };
 
-    const mostrarTokens = () => {
-        const csrfToken = getCsrfToken();
-        const sessionId = getSessionId();
-        alert(`CSRF Token: ${csrfToken}\nSession ID: ${sessionId}`);
-    };
+
 
     return (
         <div key={'paneles'} className="paneles">
