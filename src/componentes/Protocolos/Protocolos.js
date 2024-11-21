@@ -54,7 +54,7 @@ const Protocolos = () => {
             <p><strong>Subido el:</strong> {protocolo.fecha}</p>
             {protocolo.nombre.startsWith('uploaded_files/') && (
               <a
-                href={`https://belami.pythonanywhere.com/${protocolo.nombre}`}
+                href={`https://belami.pythonanywhere.com/media/${protocolo.nombre}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
