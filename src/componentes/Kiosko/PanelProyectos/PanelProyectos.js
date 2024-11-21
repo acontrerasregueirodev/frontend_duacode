@@ -13,10 +13,10 @@ axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
 
 // Función para obtener el token CSRF desde las cookies
-const getCsrfToken = () => {
-    const match = document.cookie.match(/csrftoken=([\w-]+)/);
-    return match ? match[1] : null;
-};
+// const getCsrfToken = () => {
+//     const match = document.cookie.match(/csrftoken=([\w-]+)/);
+//     return match ? match[1] : null;
+// };
 
 const Proyectos = () => {
     const [proyectos, setProyectos] = useState([]);
@@ -60,7 +60,13 @@ const Proyectos = () => {
 
     const eliminarProyecto = async (id) => {
         try {
-            // const csrfToken = getCsrfToken();
+            const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
+if (csrfToken) {
+    axios.defaults.headers.common['X-CSRFToken'] = csrfToken[1];
+} else {
+    console.error("CSRF token no encontrado");
+}
+axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 
             await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
                 withCredentials: true,
@@ -84,7 +90,7 @@ const Proyectos = () => {
 
     const guardarEdicion = async () => {
         try {
-            const csrfToken = getCsrfToken();
+            // const csrfToken = getCsrfToken();
             const empleadosActualizados = empleadosSeleccionados; // Solo los IDs de los empleados seleccionados
             const updatedProyecto = {
                 ...proyectoEditado,
@@ -140,7 +146,7 @@ const Proyectos = () => {
 
     const guardarNuevoProyecto = async () => {
         try {
-            const csrfToken = getCsrfToken();
+            // const csrfToken = getCsrfToken();
 
             await axios.post('https://belami.pythonanywhere.com/api/proyectos/', nuevoProyecto, {
                 withCredentials: true,
