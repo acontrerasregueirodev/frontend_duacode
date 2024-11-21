@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './PanelEmpleados.css';
 import axios from 'axios'
 // Configurar axios globalmente para siempre enviar las credenciales
-axios.defaults.withCredentials = true;
-axios.defaults.headers.common['X-CSRFToken'] = getCsrfToken();  // Establecer token CSRF globalmente
-
-
 // Función para obtener el token CSRF desde las cookies
 const getCsrfToken = () => {
   const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
   return csrfToken ? csrfToken.split('=')[1] : null;
 };
+axios.defaults.withCredentials = true;
+axios.defaults.headers.common['X-CSRFToken'] = getCsrfToken();  // Establecer token CSRF globalmente
+
+
 
 const PanelEmpleados = () => {
   const [empleados, setEmpleados] = useState([]);
