@@ -12,11 +12,7 @@ if (csrfToken) {
 axios.defaults.headers.common['Authorization'] = '';  // Elimina cualquier valor de Authorization
 axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
-function getCookie(name) {
-  let value = "; " + document.cookie;
-  let parts = value.split("; " + name + "=");
-  if (parts.length === 2) return parts.pop().split(";").shift();
-}
+
 // Función para obtener el token CSRF desde las cookies
 // const getCsrfToken = () => {
 //     const match = document.cookie.match(/csrftoken=([\w-]+)/);
@@ -63,37 +59,29 @@ const Proyectos = () => {
         }
     };
 
-const eliminarProyecto = async (id) => {
-  try {
-    const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
-    if (csrfToken) {
-      await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
-        withCredentials: true,
-        headers: {
-          'X-CSRFToken': csrfToken[1]
+    const eliminarProyecto = async (id) => {
+        try {
+            const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
+if (csrfToken) {
+    axios.defaults.headers.common['X-CSRFToken'] = csrfToken[1];
+} else {
+    console.error("CSRF token no encontrado");
+}
+axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
+
+            await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
+                withCredentials: true,
+                headers: {
+                    'X-CSRFToken': csrfToken
+                }
+            });
+            setProyectos(proyectos.filter(proyecto => proyecto.id !== id));
+            alert('Proyecto eliminado exitosamente');
+        } catch (error) {
+            console.error("Error al eliminar el proyecto:", error);
+            alert('No se pudo eliminar el proyecto');
         }
-      });
-    } else {
-            console.error("CSRF token no encontrado");
-        }
-
-        // // Realizar la solicitud DELETE
-        // await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
-        //     withCredentials: true,  // Permitir el envío de cookies
-        //     headers: {
-        //         'X-CSRFToken': csrfToken ? csrfToken[1] : '',  // Enviar el token CSRF en los encabezados
-        //     }
-        // });
-
-        // Actualizar el estado de los proyectos
-        setProyectos(proyectos.filter(proyecto => proyecto.id !== id));
-
-        alert('Proyecto eliminado exitosamente');
-    } catch (error) {
-        console.error("Error al eliminar el proyecto:", error);
-        alert('No se pudo eliminar el proyecto');
-    }
-};
+    };
 
     const editarProyecto = (proyecto) => {
         setProyectoEditado(proyecto);
@@ -110,10 +98,12 @@ const eliminarProyecto = async (id) => {
                 empleados: empleadosActualizados,
             };
 
+            const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
+
             await axios.put(`https://belami.pythonanywhere.com/api/proyectos/${updatedProyecto.id}/`, updatedProyecto, {
                 withCredentials: true,
-                headers: {
-                    'X-CSRFToken': csrfToken
+                        headers: {
+                'X-CSRFToken': csrfToken[1]
                 }
             });
 
