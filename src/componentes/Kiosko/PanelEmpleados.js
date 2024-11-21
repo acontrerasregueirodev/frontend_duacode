@@ -9,7 +9,6 @@ const getCsrfToken = () => {
 };
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-CSRFToken'] = getCsrfToken();  // Establecer token CSRF globalmente
-console.log(getCsrfToken())
 
 
 const PanelEmpleados = () => {
@@ -73,6 +72,7 @@ axios.defaults.withCredentials = true;
 const eliminarEmpleado = async (empleadoId) => {
   console.log(document.cookie); // Muestra las cookies para depuración
   console.log("token csrf :", getCsrfToken()); // Muestra el token CSRF
+  console.log("testeandop " ,getCsrfToken())
 
   try {
     const csrfToken = getCsrfToken(); // Asegúrate de que esta función obtenga correctamente el token CSRF

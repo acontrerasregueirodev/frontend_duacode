@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './PanelProyectos.css';
+axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
 
 const Proyectos = () => {
     const [proyectos, setProyectos] = useState([]);
