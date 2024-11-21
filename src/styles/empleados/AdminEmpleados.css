@@ -101,7 +101,7 @@
 .lista-empleados li span {
   font-size: 16px;
   color: #555;
-  flex: 1; /* Allow text to take up remaining space */
+  flex: 1; 
 }
 
 .lista-empleados li img {
@@ -130,5 +130,17 @@
 }
 
 .lista-empleados button:hover {
+  background-color: #61368b;
+}
+.editarEmpleado{
+  background-color: #985dd3fa;
+}
+.editarEmpleado:hover{
+  background-color: #61368b;
+}
+.eliminarEmpleado{
+  background-color: #985dd3fa;
+}
+.eliminarEmpleado:hover{
   background-color: #61368b;
 }

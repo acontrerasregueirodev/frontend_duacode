@@ -1,46 +1,39 @@
 .organigrama-container {
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .departamento {
-    margin: 20px 0;
-  }
-  
-  .departamento h2 {
-    font-size: 2em;
-    color: #61368C;
-    margin-bottom: 20px;
-  }
-  
-  .empleados {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .empleado-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    text-align: center;
-    transition: transform 0.3s ease;
-  }
-  
-  .empleado-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .empleado-foto {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-    object-fit: cover;
-  }
-  
+  text-align: center;
+  margin: 20px auto;
+}
+
+.empleados-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.empleado-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.empleado-foto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+h3 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
