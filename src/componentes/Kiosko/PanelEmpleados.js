@@ -82,9 +82,7 @@ const PanelEmpleados = () => {
         }
     };
 const eliminarEmpleado = async (empleadoId) => {
-  console.log(document.cookie); // Muestra las cookies para depuración
-  console.log("token csrf :", getCsrfToken()); // Muestra el token CSRF
-  console.log("testeandop " ,getCsrfToken())
+
 
   try {
               const csrfToken = document.cookie
