@@ -1,57 +1,38 @@
-.protocolos-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  min-height: 85vh;
-  overflow-y: auto;
-}
-
-.protocolos-container h1 {
-  font-size: 2.5em;
-  color: #61368C;
-  margin-bottom: 40px;
-}
-
-.protocolo-card {
+.protocolo {
   background-color: #fff;
-  border-radius: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 100%;
   max-width: 500px;
-  margin-bottom: 20px;
+  margin: 20px 0;
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.protocolo-card:hover {
+.protocolo:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-.protocolo-card h3 {
+.protocolo h2 {
   font-size: 1.8em;
   color: #333;
   margin-bottom: 10px;
 }
 
-.protocolo-card p {
-  font-size: 1.2em;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-.protocolo-card .protocolo-fecha {
+.protocolo p {
   font-size: 1.1em;
-  color: #999;
-  margin-bottom: 15px;
+  color: #666;
+  margin-bottom: 10px;
 }
 
-.protocolo-card .protocolo-enlace {
+.protocolo strong {
+  font-weight: 600;
+}
+
+.protocolo a {
   display: inline-block;
   padding: 10px 20px;
   background-color: #ff009d;
@@ -59,21 +40,15 @@
   border-radius: 5px;
   text-decoration: none;
   transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-.protocolo-card .protocolo-enlace:hover {
+.protocolo a:hover {
   background-color: #ff66b3;
 }
 
-.protocolo-card .protocolo-enlace.disabled {
+.protocolo a.disabled {
   pointer-events: none;
   color: #ccc;
   text-decoration: none;
-}
-
-.protocolos-container .no-protocolos {
-  font-size: 1.5em;
-  color: #666;
-  margin-top: 20px;
-  font-weight: 500;
 }
