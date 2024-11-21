@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './PanelEmpleados.css';
 import axios from 'axios'
 const getCsrfToken = () => {
-  return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
+  const csrfCookie = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
+  if (csrfCookie) {
+    return csrfCookie.split('=')[1];
+  }
+  return null;  // Si no se encuentra el csrfToken, retorna null o algún valor por defecto
 };
 
 const PanelEmpleados = () => {
