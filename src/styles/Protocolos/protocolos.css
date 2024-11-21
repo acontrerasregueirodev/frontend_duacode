@@ -47,6 +47,7 @@
   text-decoration: none;
   transition: background-color 0.3s ease;
   margin-top: 10px;
+  text-align: center;
 }
 
 .protocolo a:hover {
@@ -70,18 +71,3 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-  .protocolo {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .protocolo h2 {
-    font-size: 1.5em;
-  }
-
-  .protocolo p {
-    font-size: 1em;
-  }
-}
