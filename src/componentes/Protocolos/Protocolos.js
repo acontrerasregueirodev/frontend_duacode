@@ -7,35 +7,38 @@ const Protocolos = () => {
 
   useEffect(() => {
     fetch('https://belami.pythonanywhere.com/upload/')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Error en la respuesta de la red');
-        }
-        return response.text(); // Obtener el HTML como texto
-      })
-      .then((html) => {
-        // Parsear el HTML para extraer los datos necesarios
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Error en la respuesta de la red');
+    }
+    return response.text();
+  })
+  .then((html) => {
+    console.log('HTML recibido:', html); // Muestra el HTML recibido
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
 
-        // Selecciona las filas que contienen los protocolos
-        const rows = [...doc.querySelectorAll('div')].filter((div) =>
-          div.textContent.includes('Nombre:')
-        );
+    // Selecciona las filas que contienen los protocolos
+    const rows = [...doc.querySelectorAll('div')].filter((div) =>
+      div.textContent.includes('Nombre:')
+    );
 
-        // Extraer datos de cada fila
-        const data = rows.map((row) => {
-          const nombre = row.textContent.match(/Nombre:\s(.+?)\n/)[1];
-          const descripcion = row.textContent.match(/Descripción:\s(.+?)\n/)[1];
-          const fecha = row.textContent.match(/Subido el:\s(.+)/)[1];
-          return { nombre, descripcion, fecha };
-        });
+    console.log('Filas extraídas:', rows); // Muestra las filas extraídas
 
-        setProtocolos(data);
-      })
-      .catch((error) => {
-        console.error('Error al obtener los protocolos:', error);
-      });
+    const data = rows.map((row) => {
+      const nombre = row.textContent.match(/Nombre:\s(.+?)\n/)[1];
+      const descripcion = row.textContent.match(/Descripción:\s(.+?)\n/)[1];
+      const fecha = row.textContent.match(/Subido el:\s(.+)/)[1];
+      return { nombre, descripcion, fecha };
+    });
+
+    console.log('Protocolos extraídos:', data); // Muestra los protocolos extraídos
+    setProtocolos(data);
+  })
+  .catch((error) => {
+    console.error('Error al obtener los protocolos:', error);
+  });
+
   }, []);
 
   return (
