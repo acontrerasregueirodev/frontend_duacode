@@ -12,7 +12,11 @@ if (csrfToken) {
 axios.defaults.headers.common['Authorization'] = '';  // Elimina cualquier valor de Authorization
 axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
-
+function getCookie(name) {
+  let value = "; " + document.cookie;
+  let parts = value.split("; " + name + "=");
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
 // Función para obtener el token CSRF desde las cookies
 // const getCsrfToken = () => {
 //     const match = document.cookie.match(/csrftoken=([\w-]+)/);
@@ -71,9 +75,10 @@ axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 
             await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
                 withCredentials: true,
-                headers: {
-                    'X-CSRFToken': csrfToken
-                }
+                  headers: {
+    'X-CSRFToken': getCookie('csrftoken'),  // El token CSRF
+    'Authorization': 'Session ' + getCookie('sessionid')  // El token de sesión (si es necesario)
+  },
             });
             setProyectos(proyectos.filter(proyecto => proyecto.id !== id));
             alert('Proyecto eliminado exitosamente');
