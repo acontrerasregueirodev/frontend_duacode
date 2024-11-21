@@ -64,9 +64,9 @@ const PanelEmpleados = () => {
 
 const eliminarEmpleado = async (empleadoId) => {
   
+  console.log(getCsrfToken())
   try {
     const csrfToken = getCsrfToken(); // Asegúrate de que esta función obtenga correctamente el token CSRF
-    console.log(getCsrfToken)
     const response = await axios.delete(`${API_URL}${empleadoId}/`, {
       headers: {
         'Content-Type': 'application/json',
