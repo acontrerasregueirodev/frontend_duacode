@@ -1,44 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import FileUpload from '../Kiosko/FileUpload';  
-import '../../styles/Protocolos/protocolos.css'; 
 
 const Protocolos = () => {
   const [protocolos, setProtocolos] = useState([]);
 
   useEffect(() => {
     fetch('https://belami.pythonanywhere.com/upload/')
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error('Error en la respuesta de la red');
-    }
-    return response.text();
-  })
-  .then((html) => {
-    console.log('HTML recibido:', html); // Muestra el HTML recibido
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Error en la respuesta de la red');
+        }
+        return response.text();
+      })
+      .then((html) => {
+        console.log('HTML recibido:', html); // Depuración del HTML recibido
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
 
-    // Selecciona las filas que contienen los protocolos
-    const rows = [...doc.querySelectorAll('div')].filter((div) =>
-      div.textContent.includes('Nombre:')
-    );
+        // Seleccionamos todos los <li> que contienen los protocolos
+        const items = [...doc.querySelectorAll('ul li')];
+        console.log('Elementos extraídos:', items);
 
-    console.log('Filas extraídas:', rows); // Muestra las filas extraídas
+        const data = items.map((item) => {
+          const nombre = item.querySelector('strong:nth-of-type(1)').nextSibling.textContent.trim();
+          const descripcion = item.querySelector('strong:nth-of-type(2)').nextSibling.textContent.trim();
+          const fecha = item.querySelector('strong:nth-of-type(3)').nextSibling.textContent.trim();
 
-    const data = rows.map((row) => {
-      const nombre = row.textContent.match(/Nombre:\s(.+?)\n/)[1];
-      const descripcion = row.textContent.match(/Descripción:\s(.+?)\n/)[1];
-      const fecha = row.textContent.match(/Subido el:\s(.+)/)[1];
-      return { nombre, descripcion, fecha };
-    });
+          return { nombre, descripcion, fecha };
+        });
 
-    console.log('Protocolos extraídos:', data); // Muestra los protocolos extraídos
-    setProtocolos(data);
-  })
-  .catch((error) => {
-    console.error('Error al obtener los protocolos:', error);
-  });
-
+        console.log('Protocolos extraídos:', data);
+        setProtocolos(data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener los protocolos:', error);
+      });
   }, []);
 
   return (
@@ -64,17 +59,6 @@ const Protocolos = () => {
       ) : (
         <p>No hay protocolos disponibles.</p>
       )}
-
-      <FileUpload onFileUploadSuccess={(newFile) => {
-        setProtocolos((prev) => [
-          ...prev,
-          {
-            nombre: `uploaded_files/${newFile.name}`,
-            descripcion: newFile.descripcion || '',
-            fecha: new Date().toLocaleString(),
-          },
-        ]);
-      }} />
     </div>
   );
 };
