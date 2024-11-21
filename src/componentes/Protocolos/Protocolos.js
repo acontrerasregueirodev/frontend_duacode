@@ -4,8 +4,12 @@ import '../../styles/Protocolos/protocolos.css';
 
 const Protocolos = () => {
   const [protocolos, setProtocolos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const nombre = 'protocolos';
 
   useEffect(() => {
+    setLoading(true);
     fetch(`https://belami.pythonanywhere.com/media/${nombre}`)
       .then((response) => {
         if (!response.ok) {
@@ -19,12 +23,13 @@ const Protocolos = () => {
       })
       .then((data) => {
         setProtocolos(data); 
+        setLoading(false);
       })
       .catch((error) => {
-        console.error('Error al obtener los protocolos:', error);
+        setError(error.message);
+        setLoading(false);
       });
-  }, []);
-  
+  }, [nombre]);
 
   const handleFileUploadSuccess = (newFile) => {
     setProtocolos((prevProtocolos) => [
@@ -37,6 +42,14 @@ const Protocolos = () => {
     ]);
   };
 
+  if (loading) {
+    return <p>Loading protocols...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
   return (
     <div className="protocolos-container">
       <h1>Protocolos de la Empresa</h1>
@@ -46,7 +59,7 @@ const Protocolos = () => {
           <div key={index} className="protocolo">
             <h2>{protocolo.nombre}</h2>
             <p>{protocolo.descripcion}</p>
-            <p><strong>Subido el:</strong> {new Date(protocolo.fecha_subida).toLocaleString()}</p> {/* Format date */}
+            <p><strong>Subido el:</strong> {new Date(protocolo.fecha_subida).toLocaleString()}</p>
             {protocolo.enlace && (
               <a href={protocolo.enlace} target="_blank" rel="noopener noreferrer">
                 Ver Protocolo
