@@ -1,7 +1,7 @@
 /* Contenedor principal de la configuración */
 .configuracion-container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 200px auto;
   padding: 20px;
   min-height: 100vh; /* Asegura que el contenedor ocupe toda la altura visible */
   overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede la pantalla */

@@ -6,22 +6,33 @@ const Protocolos = () => {
   const [protocolos, setProtocolos] = useState([]);
 
   useEffect(() => {
-    fetch('https://belami.pythonanywhere.com/upload/')
-      .then((response) => response.json())
+    fetch('https://belami.pythonanywhere.com/media/')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error('Expected JSON response, but got something else');
+        }
+        return response.json();
+      })
       .then((data) => {
-        setProtocolos(data);
+        setProtocolos(data); // Assuming `data` is an array of files
       })
       .catch((error) => {
         console.error('Error al obtener los protocolos:', error);
       });
   }, []);
+  
 
   const handleFileUploadSuccess = (newFile) => {
     setProtocolos((prevProtocolos) => [
       ...prevProtocolos,
       {
-        titulo: newFile.name,
+        nombre: newFile.name,
         descripcion: newFile.descripcion || '', 
+        fecha_subida: newFile.fecha_subida || '', // Assuming the file has an upload date
         enlace: newFile.url || '', 
       }
     ]);
@@ -34,8 +45,9 @@ const Protocolos = () => {
       {protocolos.length > 0 ? (
         protocolos.map((protocolo, index) => (
           <div key={index} className="protocolo">
-            <h2>{protocolo.titulo}</h2>
+            <h2>{protocolo.nombre}</h2>
             <p>{protocolo.descripcion}</p>
+            <p><strong>Subido el:</strong> {new Date(protocolo.fecha_subida).toLocaleString()}</p> {/* Format date */}
             {protocolo.enlace && (
               <a href={protocolo.enlace} target="_blank" rel="noopener noreferrer">
                 Ver Protocolo

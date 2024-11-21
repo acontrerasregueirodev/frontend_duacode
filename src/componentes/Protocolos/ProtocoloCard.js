@@ -18,9 +18,14 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
         body: formData,
       });
       const result = await response.json();
-
-      // Llama a la función para actualizar el estado del protocolo con el enlace subido
-      onFileUploadSuccess(categoriaIndex, protocoloIndex, result);
+      
+      if (result.url) {
+        onFileUploadSuccess(categoriaIndex, protocoloIndex, { 
+          ...protocolo, 
+          enlace: result.url, 
+          descripcion: result.descripcion || protocolo.descripcion,
+        });
+      }
     } catch (error) {
       console.error('Error al subir el archivo:', error);
     }
@@ -38,9 +43,11 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
       >
         Ver Documento
       </a>
-      
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleFileUpload}>Subir archivo</button>
     </div>
   );
 };
+
 
 export default ProtocoloCard;
