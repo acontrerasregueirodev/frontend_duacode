@@ -4,15 +4,19 @@ const SedesList = () => {
     const [sede, setSede] = useState(null);  // Estado para almacenar una sola sede
     const [loginStatus, setLoginStatus] = useState(null);  // Estado para el estado de sesión
 
-const getCsrfToken = () => {
-  return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
+// const getCsrfToken = () => {
+//   return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
+// };
+// Función para obtener el token CSRF
+const obtenerCsrfToken = () => {
+    return window.csrfToken;
 };
 
 
     // Función para obtener las sedes desde la API
     const fetchSede = async () => {
     try {
-        const csrfToken = getCsrfToken(); // Asegúrate de tener esta función definida.
+        const csrfToken = obtenerCsrfToken(); // Asegúrate de tener esta función definida.
 
         const response = await axios.get('https://belami.pythonanywhere.com/api/sedes/sedes/', {
             headers: {
@@ -42,7 +46,7 @@ const getCsrfToken = () => {
 
 const handleCheckLogin = async () => {
     try {
-        const csrfToken = getCsrfToken();
+        const csrfToken = obtenerCsrfToken();
 
         const response = await axios.get('https://belami.pythonanywhere.com/auth/check_login/', {
             headers: {
