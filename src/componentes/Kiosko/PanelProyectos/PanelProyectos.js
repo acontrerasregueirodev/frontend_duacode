@@ -6,10 +6,15 @@ import './PanelProyectos.css';
 axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
 
 // Aseguramos que el token CSRF esté presente en todas las solicitudes
-axios.defaults.headers.common['X-CSRFToken'] = document.cookie
+const csrfToken = document.cookie
     .split('; ')
     .find(row => row.startsWith('csrftoken='))
     ?.split('=')[1];
+
+// Si se encuentra el token, lo agregamos a las cabeceras de axios
+if (csrfToken) {
+    axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
+}
 
 const Proyectos = () => {
     const [proyectos, setProyectos] = useState([]);
