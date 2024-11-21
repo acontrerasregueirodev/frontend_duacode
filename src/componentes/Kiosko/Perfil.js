@@ -30,7 +30,9 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
     useEffect(() => {
         obtenerDatosEmpleado();
     }, [id]);
-
+const obtenerCsrfToken = () => {
+    return window.csrfToken;
+};
     // Función para manejar el cierre de sesión
     const manejarCierreSesion = async () => {
         try {
