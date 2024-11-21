@@ -63,6 +63,7 @@ const PanelEmpleados = () => {
   useEffect(() => {
     leerEmpleados();
   }, []);
+axios.defaults.withCredentials = true;
 
 const eliminarEmpleado = async (empleadoId) => {
   console.log(document.cookie); // Muestra las cookies para depuración
