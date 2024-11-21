@@ -63,30 +63,34 @@ const Proyectos = () => {
         }
     };
 
-    const eliminarProyecto = async (id) => {
-        try {
-            const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
-if (csrfToken) {
-    axios.defaults.headers.common['X-CSRFToken'] = csrfToken[1];
-} else {
-    console.error("CSRF token no encontrado");
-}
-axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
-
-            await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
-                withCredentials: true,
-                  headers: {
-    'X-CSRFToken': getCookie('csrftoken'),  // El token CSRF
-    'Authorization': 'Session ' + getCookie('sessionid')  // El token de sesión (si es necesario)
-  },
-            });
-            setProyectos(proyectos.filter(proyecto => proyecto.id !== id));
-            alert('Proyecto eliminado exitosamente');
-        } catch (error) {
-            console.error("Error al eliminar el proyecto:", error);
-            alert('No se pudo eliminar el proyecto');
+const eliminarProyecto = async (id) => {
+    try {
+        // Obtener el token CSRF desde las cookies
+        const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
+        if (csrfToken) {
+            // Establecer el CSRF token en los encabezados
+            axios.defaults.headers.common['X-CSRFToken'] = csrfToken[1];
+        } else {
+            console.error("CSRF token no encontrado");
         }
-    };
+
+        // Realizar la solicitud DELETE
+        await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
+            withCredentials: true,  // Permitir el envío de cookies
+            headers: {
+                'X-CSRFToken': csrfToken ? csrfToken[1] : '',  // Enviar el token CSRF en los encabezados
+            }
+        });
+
+        // Actualizar el estado de los proyectos
+        setProyectos(proyectos.filter(proyecto => proyecto.id !== id));
+
+        alert('Proyecto eliminado exitosamente');
+    } catch (error) {
+        console.error("Error al eliminar el proyecto:", error);
+        alert('No se pudo eliminar el proyecto');
+    }
+};
 
     const editarProyecto = (proyecto) => {
         setProyectoEditado(proyecto);
