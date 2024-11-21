@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import FileUpload from './FileUpload';
+import FileUpload from '../Kiosko/FileUpload';
 
 const Protocolos = () => {
   const [protocolos, setProtocolos] = useState([]);
