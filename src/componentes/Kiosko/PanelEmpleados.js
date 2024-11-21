@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './PanelEmpleados.css';
 import axios from 'axios'
+// Función para obtener el token CSRF desde las cookies
 const getCsrfToken = () => {
-  const csrfCookie = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
-  if (csrfCookie) {
-    return csrfCookie.split('=')[1];
-  }
-  return null;  // Si no se encuentra el csrfToken, retorna null o algún valor por defecto
+  const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
+  return csrfToken ? csrfToken.split('=')[1] : null;
 };
 
 const PanelEmpleados = () => {
@@ -65,33 +63,43 @@ const PanelEmpleados = () => {
   useEffect(() => {
     leerEmpleados();
   }, []);
+axios.defaults.withCredentials = true;
 
 const eliminarEmpleado = async (empleadoId) => {
-  console.log(document.cookie);
-  console.log("token csrf :",getCsrfToken())
+  console.log(document.cookie); // Muestra las cookies para depuración
+  console.log("token csrf :", getCsrfToken()); // Muestra el token CSRF
+
   try {
     const csrfToken = getCsrfToken(); // Asegúrate de que esta función obtenga correctamente el token CSRF
+
+    if (!csrfToken) {
+      throw new Error('No se pudo obtener el token CSRF');
+    }
+
     const response = await axios.delete(`${API_URL}${empleadoId}/`, {
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRFToken': csrfToken,
+        'X-CSRFToken': csrfToken, // Enviamos el token CSRF en las cabeceras
       },
-      withCredentials: true, // Incluir cookies y credenciales
+      withCredentials: true, // Asegura que las cookies y credenciales sean incluidas
     });
 
-    // Verifica si la solicitud fue exitosa
+    // Verifica si la solicitud fue exitosa (status 204: No Content significa que se eliminó correctamente)
     if (response.status !== 204) {
       throw new Error('Error al eliminar empleado');
     }
 
     // Recargar empleados después de la eliminación
-    await leerEmpleados();
+    await leerEmpleados(); // Llama a la función que recarga la lista de empleados
     alert("Empleado eliminado con éxito.");
   } catch (error) {
     console.error("Error al eliminar empleado:", error);
     alert("No se pudo eliminar el empleado.");
   }
 };
+
+
+
 
 const agregarEmpleado = async () => {
   const empleadoData = new FormData();
