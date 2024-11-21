@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './PanelEmpleados.css';
 import axios from 'axios'
+// Configurar axios globalmente para siempre enviar las credenciales
+axios.defaults.withCredentials = true;
+
 // Función para obtener el token CSRF desde las cookies
 const getCsrfToken = () => {
   const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
