@@ -55,7 +55,7 @@ const ListaReservas = () => {
     const [modoCreacion, setModoCreacion] = useState(false);
 
     useEffect(() => {
-        axios.get('/api/sedes/reservas')
+        axios.get('https://belami.pythonanywhere.com/api/sedes/reservas')
             .then(respuesta => {
                 setReservas(respuesta.data);
                 console.log('Reservas:', respuesta.data);
@@ -64,7 +64,7 @@ const ListaReservas = () => {
                 console.error('Error al obtener las reservas:', error);
             });
 
-        axios.get('/api/empleados/')
+        axios.get('https://belami.pythonanywhere.com/api/empleados/')
             .then(respuesta => {
                 setEmpleados(respuesta.data);
             })
@@ -72,7 +72,7 @@ const ListaReservas = () => {
                 console.error('Error al obtener empleados:', error);
             });
 
-        axios.get('/api/sedes/salas') // Obtener las salas disponibles
+        axios.get('https://belami.pythonanywhere.com/api/sedes/salas') // Obtener las salas disponibles
             .then(respuesta => {
                 setSalas(respuesta.data);
             })
