@@ -6,7 +6,7 @@ const Protocolos = () => {
   const [protocolos, setProtocolos] = useState([]);
 
   useEffect(() => {
-    fetch('https://belami.pythonanywhere.com/media/')
+    fetch(`https://belami.pythonanywhere.com/media/${nombre}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -18,7 +18,7 @@ const Protocolos = () => {
         return response.json();
       })
       .then((data) => {
-        setProtocolos(data); // Assuming `data` is an array of files
+        setProtocolos(data); 
       })
       .catch((error) => {
         console.error('Error al obtener los protocolos:', error);
@@ -32,7 +32,6 @@ const Protocolos = () => {
       {
         nombre: newFile.name,
         descripcion: newFile.descripcion || '', 
-        fecha_subida: newFile.fecha_subida || '', // Assuming the file has an upload date
         enlace: newFile.url || '', 
       }
     ]);
