@@ -14,7 +14,7 @@ html {
   align-items: center;
 }
 
-/* Header Styling */
+
 .header {
   background-color: #61368c;
   position: fixed;
@@ -26,7 +26,6 @@ html {
   z-index: 1000;
 }
 
-/* Centra el logo y lo pinta de blanco */
 .logo {
   font-size: 24px;
   font-weight: bold;
@@ -48,7 +47,6 @@ html {
   justify-content: center;
 }
 
-/* Detalles del Empleado */
 .detalle-empleado-container {
   text-align: center;
 }
@@ -108,7 +106,6 @@ p strong {
   color: #333;
 }
 
-/* Layout Adjustments for Responsiveness */
 @media (max-width: 768px) {
   .detalle-empleado-card {
     width: 90%;
@@ -116,7 +113,6 @@ p strong {
   }
 }
 
-/* Contenedor de las imágenes animadas */
 .balloons-container {
   position: absolute;
   bottom: 0;
@@ -128,7 +124,6 @@ p strong {
   z-index: 999;
 }
 
-/* Estilos para las imágenes */
 .balloon-image {
   position: absolute;
   bottom: -150px;
@@ -136,7 +131,6 @@ p strong {
   animation: floatAndFade 7s ease-in forwards;
 }
 
-/* Animación para las imágenes */
 @keyframes floatAndFade {
   0% {
     transform: translate(0, 0) rotate(0deg);
@@ -155,7 +149,6 @@ p strong {
   }
 }
 
-/* Ajustes de las imágenes en diferentes posiciones */
 .balloon-image:nth-child(1) {
   left: 10%;
   animation-duration: 5s;

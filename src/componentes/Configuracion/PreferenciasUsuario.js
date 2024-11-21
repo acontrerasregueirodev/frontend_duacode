@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const Preferencias = () => {
-  const [tema, setTema] = useState('Claro'); // Por defecto, tema claro
+  const [tema, setTema] = useState('Claro');
   const [idioma, setIdioma] = useState('Español');
   const [recibirNotificaciones, setRecibirNotificaciones] = useState(true);
   const { i18n } = useTranslation();

@@ -103,7 +103,7 @@
     color: #7e0fee;
 }
 
-/* Responsive: Ajuste de Flexbox */
+/* Responsive(prescindible) */
 @media (max-width: 768px) {
     .detalle-contenedor {
         flex-direction: column;

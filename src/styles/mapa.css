@@ -1,4 +1,3 @@
-/* Estilos del contenedor del mapa */
 .mapa-sedes-container {
     padding: 20px;
     text-align: center;
@@ -10,13 +9,11 @@
     margin-bottom: 20px;
 }
 
-/* Contenedor del mapa */
 #map {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo del botón para alternar entre modo oscuro y claro */
 .toggle-mode-btn {
     margin-top: 20px;
     padding: 10px 20px;
@@ -32,7 +29,6 @@
     background-color: #ff009d;
 }
 
-/* Ajuste para pantallas más pequeñas */
 @media (max-width: 768px) {
     #map {
         height: 300px;

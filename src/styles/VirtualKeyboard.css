@@ -1,7 +1,7 @@
 .virtual-keyboard {
   display: flex;
   flex-direction: column;
-  background-color: #61368c; /* Fondo morado corporativo */
+  background-color: #61368c; 
   padding: 10px;
   border-radius: 8px;
   position: fixed;
@@ -24,7 +24,7 @@
 }
 
 .close-keyboard-btn {
-  background-color: #ff009d; /* Botón de cierre con color corporativo rosa */
+  background-color: #ff009d; 
   color: white;
   border: none;
   padding: 5px 10px;
@@ -34,10 +34,9 @@
 }
 
 .close-keyboard-btn:hover {
-  background-color: #ff6b6b; /* Hover en un tono más claro */
+  background-color: #ff6b6b; 
 }
 
-/* Estilo de las teclas */
 .keyboard-row {
   display: flex;
   justify-content: center;

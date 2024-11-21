@@ -40,7 +40,7 @@ const VirtualKeyboard = ({ onKeyPress, onClose }) => {
       style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp} // Evita que el arrastre continúe fuera del teclado
+      onMouseLeave={handleMouseUp}
     >
       <div className="keyboard-header" onMouseDown={handleMouseDown}>
         <span>Teclado Virtual</span>

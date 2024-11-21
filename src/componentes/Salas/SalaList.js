@@ -30,7 +30,7 @@ const SalaList = ({ salas }) => {
   return (
     <div className="carrusel-container">
       <button className="carrusel-button left" onClick={scrollLeft}>
-        &#10094; {/* Flecha hacia la izquierda */}
+        &#10094;
       </button>
 
       <div className="carrusel" ref={carruselRef}>
@@ -38,9 +38,9 @@ const SalaList = ({ salas }) => {
           <SalaCard key={sala.id} sala={sala} />
         ))}
       </div>
-
+        
       <button className="carrusel-button right" onClick={scrollRight}>
-        &#10095; {/* Flecha hacia la derecha */}
+        &#10095;
       </button>
     </div>
   );

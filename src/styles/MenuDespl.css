@@ -1,8 +1,7 @@
-/* Barra lateral (sidebar) */
 .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* Inicialmente oculto fuera de la pantalla */
+    left: -250px; 
     width: 250px;
     background-color: #61368cf1;
     height: 100vh;
@@ -13,17 +12,15 @@
     z-index: 1001;
 }
 
-/* Clase activa para mostrar el menú */
 .sidebar.active {
-    left: 0; /* Despliega el menú lateral */
+    left: 0; 
 }
 
-/* Estilos para el contenido */
+
 .main.active {
-    margin-left: 250px; /* Empuja el contenido cuando el menú está desplegado */
+    margin-left: 250px; 
 }
 
-/* Estilos del botón de menú (hamburguesa) */
 .menu-button {
     position: fixed;
     top: 20px;
@@ -46,7 +43,6 @@
     transition: 0.3s;
 }
 
-/* Cambia el icono de hamburguesa a "X" */
 .menu-button.active span:nth-child(1) {
     transform: rotate(45deg) translateY(10px);
 }

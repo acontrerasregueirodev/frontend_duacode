@@ -48,7 +48,7 @@
 
 .sala-card:hover h2,
 .sala-card:hover p {
-  color: #fff; /* Cambiar el color del texto a blanco cuando se pasa el mouse */
+  color: #fff; 
 }
 
 .sala-card p {
@@ -57,25 +57,25 @@
   margin: 5px 0;
 }
 
-/* Estilo de disponibilidad */
+
 .disponibilidad-ocupada {
-  color: #ff0000; /* Rojo para "Ocupada" */
+  color: #ff0000; 
   font-weight: bold;
 }
 
 .disponibilidad-libre {
-  color: #00a000; /* Verde para "Libre" */
+  color: #00a000; 
   font-weight: bold;
 }
 
-/* Mensaje de reserva */
+
 .message {
   color: #61368C;
   font-size: 1.2em;
   margin-bottom: 20px;
 }
 
-/* Estilo del botón de reserva */
+
 .reservar-btn {
   display: inline-block;
   margin-top: 15px;
@@ -91,8 +91,7 @@
 
 .reservar-btn:hover {
   background-color: #ff66b3;
-  transform: scale(1.05); /* Aumentar ligeramente el tamaño al pasar el mouse */
-}
+  transform: scale(1.05); }
 @media (max-width: 768px) {
   #salas-container h1 {
     font-size: 1.8em;

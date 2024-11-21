@@ -59,7 +59,7 @@ const Rutas = () => {
           <Route path="/admin/proyectos" element={<AdminProyectos />} />
           <Route path="/admin/salas" element={<AdminSalas />} />
 
-      <Route path="/login" element={<Login />} /> {/* Nueva ruta para Login */}
+      <Route path="/login" element={<Login />} />
     </>
   );
 }

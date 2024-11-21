@@ -114,8 +114,8 @@
 .lista-empleados .botones {
   display: flex;
   gap: 5px;
-  justify-content: flex-end; /* Align buttons to the right */
-  min-width: 120px; /* Set minimum width for consistent column */
+  justify-content: flex-end; 
+  min-width: 120px; 
 }
 
 .lista-empleados button {
