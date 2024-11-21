@@ -1,11 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../styles/inicio.css';
-import IconoLogin from '../assets/login.svg'; 
 
-const Header = ({ menuOpen, setMenuOpen }) => {
-  const navigate = useNavigate(); 
-
+const Header = ({ menuOpen, setMenuOpen, searchVisible, setSearchVisible, searchTerm, setSearchTerm }) => {
   return (
     <header className={`header ${menuOpen ? "menu-open" : ""}`}>
       <div
@@ -20,9 +16,10 @@ const Header = ({ menuOpen, setMenuOpen }) => {
         <h1 className="brand-title">
           duacode<span className="highlight">.</span>
         </h1>
+        <icon></icon>
       </div>
     </header>
   );
 };
 
-export default Header;
+export default Header; 
