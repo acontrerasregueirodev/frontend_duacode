@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProtocoloCard from './ProtocoloCard';  
-import FileUpload from '../Kiosko/FileUpload';  
-import '../../styles/Protocolos/protocolos.css';
+import FileUpload from './FileUpload';
 
 const Protocolos = () => {
   const [protocolos, setProtocolos] = useState([]);
@@ -10,11 +8,22 @@ const Protocolos = () => {
     fetch('https://belami.pythonanywhere.com/upload/')
       .then((response) => {
         if (!response.ok) {
-          throw new Error('La respuesta de la red no fue correcta');
+          throw new Error('Error en la respuesta de la red');
         }
-        return response.json();
+        return response.text();
       })
-      .then((data) => {
+      .then((html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const items = [...doc.querySelectorAll('ul li')];
+        const data = items.map((item) => {
+          const nombre = item.querySelector('strong:nth-of-type(1)').nextSibling.textContent.trim();
+          const descripcion = item.querySelector('strong:nth-of-type(2)').nextSibling.textContent.trim();
+          const fecha = item.querySelector('strong:nth-of-type(3)').nextSibling.textContent.trim();
+
+          return { nombre, descripcion, fecha };
+        });
+
         setProtocolos(data);
       })
       .catch((error) => {
@@ -36,16 +45,22 @@ const Protocolos = () => {
   return (
     <div className="protocolos-container">
       <h1>Protocolos de la Empresa</h1>
-      
       {protocolos.length > 0 ? (
         protocolos.map((protocolo, index) => (
-          <ProtocoloCard
-            key={index}
-            protocolo={protocolo}
-            categoriaIndex={0}
-            protocoloIndex={index}
-            onFileUploadSuccess={handleFileUploadSuccess}
-          />
+          <div key={index} className="protocolo">
+            <h2>{protocolo.nombre}</h2>
+            <p>{protocolo.descripcion}</p>
+            <p><strong>Subido el:</strong> {protocolo.fecha}</p>
+            {protocolo.nombre.startsWith('uploaded_files/') && (
+              <a
+                href={`https://belami.pythonanywhere.com/${protocolo.nombre}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver Documento
+              </a>
+            )}
+          </div>
         ))
       ) : (
         <p>No hay protocolos disponibles.</p>
