@@ -1,38 +1,54 @@
-.file-upload {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #f7f7f7;
+.protocolo {
+  background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  padding: 20px;
   width: 100%;
   max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  box-sizing: border-box;
+  margin: 20px 0;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.file-upload input[type="file"] {
-  margin-bottom: 15px;
-  padding: 10px;
-  font-size: 1em;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  width: 100%;
+.protocolo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-.file-upload button {
+.protocolo h2 {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.protocolo p {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.protocolo strong {
+  font-weight: 600;
+}
+
+.protocolo a {
+  display: inline-block;
   padding: 10px 20px;
   background-color: #ff009d;
   color: #fff;
-  font-size: 1.1em;
-  border: none;
   border-radius: 5px;
-  cursor: pointer;
+  text-decoration: none;
   transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-.file-upload button:hover {
+.protocolo a:hover {
   background-color: #ff66b3;
+}
+
+.protocolo a.disabled {
+  pointer-events: none;
+  color: #ccc;
+  text-decoration: none;
 }
