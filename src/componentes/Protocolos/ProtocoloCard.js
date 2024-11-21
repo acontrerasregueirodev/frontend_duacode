@@ -8,11 +8,7 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
   };
 
   const handleFileUpload = async () => {
-    if (!file) {
-      alert('Por favor, selecciona un archivo antes de subirlo.');
-      return;
-    }
-
+    if (!file) return;
     const formData = new FormData();
     formData.append('file', file);
 
@@ -21,15 +17,9 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
         method: 'POST',
         body: formData,
       });
-
       const result = await response.json();
-      if (result.url) {
-        onFileUploadSuccess(categoriaIndex, protocoloIndex, { 
-          ...protocolo, 
-          enlace: result.url, 
-          descripcion: result.descripcion || protocolo.descripcion,
-        });
-      }
+
+      onFileUploadSuccess({ ...protocolo, enlace: result.url, descripcion: result.descripcion });
     } catch (error) {
       console.error('Error al subir el archivo:', error);
     }
@@ -37,20 +27,20 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
 
   return (
     <div className="protocolo-card">
-      <h3>{protocolo.nombre}</h3>
+      <h3>{protocolo.titulo}</h3>
       <p>{protocolo.descripcion}</p>
-      <p><strong>Subido el:</strong> {protocolo.fecha}</p>
-      {protocolo.nombre.startsWith('uploaded_files/') && (
-        <a
-          href={`https://belami.pythonanywhere.com/media/${protocolo.nombre}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Ver Documento
-        </a>
-      )}
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleFileUpload}>Subir archivo</button>
+      <a
+        href={protocolo.enlace || '#'}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`protocolo-enlace ${protocolo.enlace ? '' : 'disabled'}`}
+      >
+        Ver Documento
+      </a>
+      <div className="file-upload">
+        <input type="file" onChange={handleFileChange} />
+        <button onClick={handleFileUpload}>Subir Archivo</button>
+      </div>
     </div>
   );
 };
