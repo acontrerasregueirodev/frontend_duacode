@@ -4,11 +4,12 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    if (selectedFile) setFile(selectedFile);
   };
 
   const handleFileUpload = async () => {
-    if (!file) return;
+    if (!file) return alert('Por favor selecciona un archivo antes de subir.');
     const formData = new FormData();
     formData.append('file', file);
 
@@ -17,17 +18,18 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
         method: 'POST',
         body: formData,
       });
+      if (!response.ok) throw new Error('Error al subir el archivo.');
       const result = await response.json();
-      
       if (result.url) {
-        onFileUploadSuccess(categoriaIndex, protocoloIndex, { 
-          ...protocolo, 
-          enlace: result.url, 
+        onFileUploadSuccess(categoriaIndex, protocoloIndex, {
+          ...protocolo,
+          enlace: result.url,
           descripcion: result.descripcion || protocolo.descripcion,
         });
       }
     } catch (error) {
       console.error('Error al subir el archivo:', error);
+      alert('Hubo un problema al subir el archivo.');
     }
   };
 
@@ -37,17 +39,16 @@ const ProtocoloCard = ({ protocolo, categoriaIndex, protocoloIndex, onFileUpload
       <p>{protocolo.descripcion}</p>
       <a
         href={protocolo.enlace || '#'}
-        target="_blank"
+        target={protocolo.enlace ? '_blank' : '_self'}
         rel="noopener noreferrer"
-        className={`protocolo-enlace ${protocolo.enlace ? '' : 'disabled'}`}
+        className={protocolo.enlace ? 'protocolo-enlace' : 'protocolo-enlace disabled'}
       >
-        Ver Documento
+        {protocolo.enlace ? 'Ver Documento' : 'Documento no disponible'}
       </a>
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleFileUpload}>Subir archivo</button>
     </div>
   );
 };
-
 
 export default ProtocoloCard;
