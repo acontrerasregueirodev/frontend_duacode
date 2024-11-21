@@ -3,8 +3,12 @@ import axios from 'axios';
 import './PanelProyectos.css';
 
 // Configuración global de axios
-const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/)[1];
-
+const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
+if (csrfToken) {
+    axios.defaults.headers.common['X-CSRFToken'] = csrfToken[1];
+} else {
+    console.error("CSRF token no encontrado");
+}
 axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
 
