@@ -3,6 +3,13 @@ import axios from 'axios';
 import './PanelProyectos.css';
 
 // Configuración global de axios
+const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
+if (csrfToken) {
+    axios.defaults.headers.common['X-CSRFToken'] = csrfToken[1];
+} else {
+    console.error("CSRF token no encontrado");
+}
+axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
 
 // Función para obtener el token CSRF desde las cookies
@@ -53,7 +60,7 @@ const Proyectos = () => {
 
     const eliminarProyecto = async (id) => {
         try {
-            const csrfToken = getCsrfToken();
+            // const csrfToken = getCsrfToken();
 
             await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
                 withCredentials: true,
