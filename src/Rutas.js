@@ -15,7 +15,7 @@ import Configuracion from './componentes/Configuracion/Configuracion';
 import Sedes from './componentes/Sedes/Sedes';
 import Mapa from './componentes/Mapa';
 import Salas from './componentes/Salas/Salas';
-import Reserva from './componentes/Reserva';
+import Reserva from './componentes/Salas/Reserva';
 // IMPORTS PARA VISTA KIOSKO TEST ADRIAN
 import KioskoDuacode from './componentes/Kiosko/KioskoDuacode'; // Si aún lo necesitas
 import AdminEmpleados from './componentes/Empleados/AdminEmpleados';
