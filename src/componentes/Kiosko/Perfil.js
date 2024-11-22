@@ -70,15 +70,20 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
 
 const manejarGuardar = async (datosActualizados) => {
     console.log("Datos enviados para actualizar:", datosActualizados);
+
+    // Obtener el token CSRF desde las cookies
+    const csrfToken = obtenerCsrfToken(); // Asegúrate de que esta función obtiene el token correctamente
+    console.log("Token CSRF obtenido:", csrfToken);
     
     try {
-        // axiosClient ya maneja el token CSRF automáticamente
+        // Asegurarse de que axiosClient utilice el token CSRF correcto
         const respuesta = await axiosClient.put(
             `api/empleados/${id}/`, // URL relativa para la API, usando axiosClient
             datosActualizados,
             {
                 headers: {
-                    'Content-Type': 'application/json', // Solo necesario si es parte de los encabezados que quieres enviar
+                    'Content-Type': 'application/json', // Solo necesario si es parte de los encabezados
+                    'X-CSRFToken': csrfToken, // Añadir manualmente el token CSRF en los encabezados
                 },
                 withCredentials: true, // Asegurarse de enviar cookies y credenciales
             }
