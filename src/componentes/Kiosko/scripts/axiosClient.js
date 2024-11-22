@@ -30,17 +30,20 @@ axiosClient.interceptors.response.use(
 );
 
 // Interceptor para solicitudes
-axiosClient.interceptors.request.use(
-  (config) => {
-    if (csrfToken) {
-      // Adjunta el token CSRF a las solicitudes salientes
-      config.headers['X-CSRFToken'] = csrfToken;
+axiosClient.interceptors.response.use(
+  (response) => {
+    const token = response.headers['x-csrftoken'];
+    if (token) {
+      window.csrfStore.token = token; // Guarda el token globalmente
+      console.log('Token CSRF capturado:', token);
     }
-    return config;
+    return response;
   },
   (error) => {
+    console.error('Error en la respuesta:', error);
     return Promise.reject(error);
   }
 );
+
 
 export default axiosClient;
