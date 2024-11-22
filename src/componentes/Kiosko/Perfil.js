@@ -4,9 +4,21 @@ import EditarPerfil from './EditarPerfil';
 import './Perfil.css';
 
 // Función para obtener el token CSRF
-const obtenerCsrfToken = () => {
-    return window.csrfToken; // Suponiendo que el token CSRF está disponible globalmente
-};
+// Función para obtener el token CSRF de las cookies
+function obtenerCsrfToken() {
+    // Obtener todas las cookies del documento
+    const cookies = document.cookie.split(';');
+    
+    // Buscar la cookie csrf token
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim(); // Eliminar espacios
+        if (cookie.startsWith('csrftoken=')) {
+            return cookie.substring('csrftoken='.length, cookie.length); // Devuelve el valor del token
+        }
+    }
+    
+    return null; // Si no se encuentra el token, retorna null
+}
 
 const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
     const [datosEmpleado, establecerDatosEmpleado] = useState(null); // Datos del empleado
@@ -55,31 +67,32 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
         }
     };
 
-    // Función para manejar la actualización de datos
-    const manejarGuardar = async (datosActualizados) => {
-        const csrfToken = obtenerCsrfToken();
-        console.log("Token CSRF obtenido:", csrfToken);
-        console.log("Datos enviados para actualizar:", datosActualizados);
+// Función para manejar la actualización de datos
+const manejarGuardar = async (datosActualizados) => {
+    // Obtener el token CSRF desde las cookies
+    const csrfToken = obtenerCsrfToken(); // Asegúrate de que esta función obtenga el token correctamente
+    console.log("Token CSRF obtenido:", csrfToken);
+    console.log("Datos enviados para actualizar:", datosActualizados);
 
-        try {
-            const respuesta = await axiosClient.put(
-                `api/empleados/${id}/`, // Usar axiosClient
-                datosActualizados,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        
-                    },
-                    withCredentials: true,
-                }
-            );
+    try {
+        const respuesta = await axios.put(
+            `https://belami.pythonanywhere.com/api/empleados/${id}/`, // URL completa para la API
+            datosActualizados,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,  // Añadir el token CSRF en los encabezados
+                },
+                withCredentials: true,  // Asegurarse de enviar cookies y credenciales
+            }
+        );
 
-            establecerDatosEmpleado(respuesta.data);
-            establecerEnEdicion(false); // Salir del modo edición
-        } catch (error) {
-            console.error('Error al actualizar el perfil:', error.message);
-        }
-    };
+        establecerDatosEmpleado(respuesta.data);
+        establecerEnEdicion(false); // Salir del modo edición
+    } catch (error) {
+        console.error('Error al actualizar el perfil:', error.message);
+    }
+};
 
     // Muestra un mensaje de error si no se pudieron cargar los datos
     if (!datosEmpleado) {
