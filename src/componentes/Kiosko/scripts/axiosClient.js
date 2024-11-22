@@ -17,7 +17,7 @@ if (!window.csrfStore) {
 // Interceptor para respuestas
 axiosClient.interceptors.response.use(
   (response) => {
-    // Verifica el token CSRF en los encabezados
+    // Intenta obtener el token CSRF del encabezado
     let token = response.headers['x-csrftoken'] || response.headers['csrf-token'];
 
     // Si no está en los encabezados, busca en el cuerpo de la respuesta
@@ -26,11 +26,13 @@ axiosClient.interceptors.response.use(
     }
 
     if (token) {
-      window.csrfStore.token = token; // Guarda el token globalmente
+      // Guarda el token en window.csrfStore para solicitudes futuras
+      window.csrfStore.token = token;
       console.log('Token CSRF capturado y almacenado:', token);
     } else {
       console.log('No se encontró token CSRF en la respuesta.');
     }
+
     return response;
   },
   (error) => {
@@ -42,7 +44,7 @@ axiosClient.interceptors.response.use(
 // Interceptor para solicitudes
 axiosClient.interceptors.request.use(
   (config) => {
-    // Adjunta el token CSRF a las solicitudes salientes si está disponible
+    // Obtén el token CSRF de window.csrfStore y agrégalo al encabezado de la solicitud
     const csrfToken = window.csrfStore?.token;
     if (csrfToken) {
       config.headers['X-CSRFToken'] = csrfToken;
@@ -50,6 +52,7 @@ axiosClient.interceptors.request.use(
     } else {
       console.log('No se encontró token CSRF para agregar a la solicitud.');
     }
+
     return config;
   },
   (error) => {

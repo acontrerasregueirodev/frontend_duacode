@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import './LectorQr.css';
 import Perfil from './Perfil';
-import axiosClient from '../Kiosko/scripts/axiosClient' // Importamos axiosClient
+import axiosClient from '../Kiosko/scripts/axiosClient'; // Importamos axiosClient
 
 const LectorQr = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +12,8 @@ const LectorQr = () => {
   const [qrScanned, setQrScanned] = useState(false);
   const videoRef = useRef(null);
   const videoStreamRef = useRef(null);
-  const token = window.csrfStore.token;
+
+  // Obtener cookie CSRF
   const getCookie = (name) => {
     let cookieValue = null;
     if (document.cookie && document.cookie !== "") {
@@ -45,21 +46,22 @@ const LectorQr = () => {
       startVideoStream();
     }
 
+    // Cargar la biblioteca de QR
     const script = document.createElement("script");
     script.src = "https://unpkg.com/@zxing/library@latest";
     script.async = true;
     script.onload = () => {
       const codeReader = new window.ZXing.BrowserQRCodeReader();
-
       codeReader.decodeFromVideoDevice(null, videoRef.current, (result, err) => {
         if (result) {
-          const employeeData = JSON.parse(result.text);
-          const newUsername = `${employeeData.nombre}.${employeeData.apellido_1}`;
-          const newPassword = employeeData.contraseña;
-
-          setUsername(newUsername);
-          setPassword(newPassword);
-          setQrScanned(true);
+          try {
+            const employeeData = JSON.parse(result.text);
+            setUsername(`${employeeData.nombre}.${employeeData.apellido_1}`);
+            setPassword(employeeData.contraseña);
+            setQrScanned(true);
+          } catch (e) {
+            console.error("Error al procesar el código QR:", e);
+          }
         }
       });
     };
@@ -73,6 +75,7 @@ const LectorQr = () => {
     };
   }, [isAuthenticated]);
 
+  // Manejar el envío del formulario
   const handleSubmit = async () => {
     try {
       const response = await axiosClient.post(
@@ -84,17 +87,16 @@ const LectorQr = () => {
         {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': token,
+            'X-CSRFToken': csrfToken || window.csrfStore.token, // Usar el token CSRF
           },
-          withCredentials: true, // Esto es equivalente a `credentials: 'include'`
+          withCredentials: true, // Incluir cookies en las solicitudes
         }
       );
 
-      // Imprimir el csrfToken en consola
-      console.log('CSRF Token:', token);
+      console.log('CSRF Token usado:', csrfToken || window.csrfStore.token);
 
       if (response.status === 200) {
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token', response.data.token); // Guardar el token de sesión en localStorage
         setWelcomeMessage(response.data.message);
         setIsAuthenticated(true);
       }
@@ -104,12 +106,14 @@ const LectorQr = () => {
     }
   };
 
+  // Manejar el inicio de sesión automático tras escanear el QR
   useEffect(() => {
     if (qrScanned && username && password) {
       handleSubmit();
     }
   }, [qrScanned, username, password]);
 
+  // Cerrar sesión
   const handleLogout = () => {
     setIsAuthenticated(false);
     setUsername("");
@@ -154,7 +158,6 @@ const LectorQr = () => {
           </div>
         </div>
       </div>
-
       {welcomeMessage && <div className="welcome-message">{welcomeMessage}</div>}
     </div>
   );
