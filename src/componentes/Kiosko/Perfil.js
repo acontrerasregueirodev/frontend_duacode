@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosClient from '../Kiosko/scripts/axiosClient'; // Importar axiosClient
 import EditarPerfil from './EditarPerfil';
 import './Perfil.css';
+import axios from 'axios'
 
 // Función para obtener el token CSRF
 // Función para obtener el token CSRF de las cookies
