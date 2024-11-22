@@ -68,23 +68,19 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
         }
     };
 
-// Función para manejar la actualización de datos
 const manejarGuardar = async (datosActualizados) => {
-    // Obtener el token CSRF desde las cookies
-    const csrfToken = obtenerCsrfToken(); // Asegúrate de que esta función obtenga el token correctamente
     console.log("Datos enviados para actualizar:", datosActualizados);
     
     try {
-        console.log("Token CSRF obtenido:", csrfToken);
-        const respuesta = await axios.put(
-            `https://belami.pythonanywhere.com/api/empleados/${id}/`, // URL completa para la API
+        // axiosClient ya maneja el token CSRF automáticamente
+        const respuesta = await axiosClient.put(
+            `api/empleados/${id}/`, // URL relativa para la API, usando axiosClient
             datosActualizados,
             {
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken,  // Añadir el token CSRF en los encabezados
+                    'Content-Type': 'application/json', // Solo necesario si es parte de los encabezados que quieres enviar
                 },
-                withCredentials: true,  // Asegurarse de enviar cookies y credenciales
+                withCredentials: true, // Asegurarse de enviar cookies y credenciales
             }
         );
 
@@ -94,6 +90,7 @@ const manejarGuardar = async (datosActualizados) => {
         console.error('Error al actualizar el perfil:', error.message);
     }
 };
+
 
     // Muestra un mensaje de error si no se pudieron cargar los datos
     if (!datosEmpleado) {

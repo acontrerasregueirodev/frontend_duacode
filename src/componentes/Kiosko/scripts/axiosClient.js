@@ -23,6 +23,8 @@ axiosClient.interceptors.response.use(
 
     if (token) {
       console.log('Token CSRF capturado desde la respuesta:', token);
+      // Guardar el token CSRF en el encabezado para futuras solicitudes
+      axiosClient.defaults.headers['X-CSRFToken'] = token;
     } else {
       console.log('No se encontró token CSRF en la respuesta.');
     }
@@ -38,9 +40,14 @@ axiosClient.interceptors.response.use(
 // Interceptor para solicitudes
 axiosClient.interceptors.request.use(
   (config) => {
-    // No es necesario agregar el token CSRF manualmente si las cookies están configuradas correctamente
-    console.log('Enviando solicitud con las credenciales (cookies) necesarias.');
-
+    // Asegurarse de que el token CSRF esté en los encabezados de cada solicitud
+    const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
+    if (csrfToken) {
+      // Extrae el token de la cookie y lo añade al encabezado
+      config.headers['X-CSRFToken'] = csrfToken.split('=')[1];
+    }
+    console.log('Enviando solicitud con el token CSRF en el encabezado:', config.headers['X-CSRFToken']);
+    
     return config;
   },
   (error) => {
