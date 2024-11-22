@@ -68,7 +68,7 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRFToken': csrfToken,
+                        
                     },
                     withCredentials: true,
                 }
