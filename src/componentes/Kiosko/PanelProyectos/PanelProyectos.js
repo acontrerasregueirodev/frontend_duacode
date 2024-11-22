@@ -20,7 +20,7 @@ const Proyectos = () => {
 
     const obtenerProyectos = async () => {
         try {
-            const response = await axiosClient.get('proyectos/');
+            const response = await axiosClient.get('/api/proyectos/');
             setProyectos(Array.isArray(response.data) ? response.data : []);
             setLoading(false);
         } catch (error) {
