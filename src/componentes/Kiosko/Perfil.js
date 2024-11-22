@@ -72,10 +72,10 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
 const manejarGuardar = async (datosActualizados) => {
     // Obtener el token CSRF desde las cookies
     const csrfToken = obtenerCsrfToken(); // Asegúrate de que esta función obtenga el token correctamente
-    console.log("Token CSRF obtenido:", csrfToken);
     console.log("Datos enviados para actualizar:", datosActualizados);
-
+    
     try {
+        console.log("Token CSRF obtenido:", csrfToken);
         const respuesta = await axios.put(
             `https://belami.pythonanywhere.com/api/empleados/${id}/`, // URL completa para la API
             datosActualizados,
