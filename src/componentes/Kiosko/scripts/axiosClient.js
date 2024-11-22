@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Crear un cliente de Axios
 const axiosClient = axios.create({
-  baseURL: 'https://belami.pythonanywhere.com/api',
+  baseURL: 'https://belami.pythonanywhere.com/',
   timeout: 10000, // Tiempo de espera en milisegundos
   headers: {
     'Content-Type': 'application/json',

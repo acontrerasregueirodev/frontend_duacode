@@ -10,7 +10,7 @@ const Bienvenida = () => {
     // Función para obtener el mensaje y el token CSRF
     const fetchWelcomeMessage = async () => {
       try {
-        const response = await axiosClient.get('https:\\belami.pythonanywhere.com/'); // Cambia la URL si es necesario
+        const response = await axiosClient.get('/'); // Cambia la URL si es necesario
         console.log('Respuesta recibida:', response.data);
 
         // Establecemos el mensaje y el token CSRF en el estado
