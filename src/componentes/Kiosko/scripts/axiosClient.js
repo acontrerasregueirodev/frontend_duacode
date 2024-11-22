@@ -2,22 +2,18 @@ import axios from 'axios';
 
 // Crear un cliente de Axios
 const axiosClient = axios.create({
-  baseURL: 'https://belami.pythonanywhere.com/',
+  baseURL: 'https://belami.pythonanywhere.com/', // Ajusta la URL base según tu proyecto
   timeout: 10000, // Tiempo de espera en milisegundos
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true, // Permite que las cookies (como csrftoken) se envíen en las solicitudes
 });
-
-// Inicializa window.csrfStore si no existe
-if (!window.csrfStore) {
-  window.csrfStore = { token: '' };
-}
 
 // Interceptor para respuestas
 axiosClient.interceptors.response.use(
   (response) => {
-    // Intenta obtener el token CSRF del encabezado
+    // Si necesitas hacer algo con el token CSRF desde la respuesta (por ejemplo, almacenarlo o verificarlo)
     let token = response.headers['x-csrftoken'] || response.headers['csrf-token'];
 
     // Si no está en los encabezados, busca en el cuerpo de la respuesta
@@ -26,9 +22,7 @@ axiosClient.interceptors.response.use(
     }
 
     if (token) {
-      // Guarda el token en window.csrfStore para solicitudes futuras
-      window.csrfStore.token = token;
-      console.log('Token CSRF capturado y almacenado:', token);
+      console.log('Token CSRF capturado desde la respuesta:', token);
     } else {
       console.log('No se encontró token CSRF en la respuesta.');
     }
@@ -44,14 +38,8 @@ axiosClient.interceptors.response.use(
 // Interceptor para solicitudes
 axiosClient.interceptors.request.use(
   (config) => {
-    // Obtén el token CSRF de window.csrfStore y agrégalo al encabezado de la solicitud
-    const csrfToken = window.csrfStore?.token;
-    if (csrfToken) {
-      config.headers['X-CSRFToken'] = csrfToken;
-      console.log('Token CSRF agregado a la solicitud:', csrfToken);
-    } else {
-      console.log('No se encontró token CSRF para agregar a la solicitud.');
-    }
+    // No es necesario agregar el token CSRF manualmente si las cookies están configuradas correctamente
+    console.log('Enviando solicitud con las credenciales (cookies) necesarias.');
 
     return config;
   },
