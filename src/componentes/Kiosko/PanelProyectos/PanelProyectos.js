@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axiosClient from 'scripts/axiosClient';  // Importa el cliente de axios
+import axiosClient from '../scripts/axiosClient';  // Importa el cliente de axios
 import './PanelProyectos.css';
 
 const Proyectos = () => {
