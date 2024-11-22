@@ -31,7 +31,7 @@ const Proyectos = () => {
 
     const obtenerEmpleados = async () => {
         try {
-            const response = await axiosClient.get('empleados/');
+            const response = await axiosClient.get('/api/empleados/');
             setEmpleados(response.data);
         } catch (error) {
             console.error("Error al obtener los empleados:", error);
@@ -40,7 +40,7 @@ const Proyectos = () => {
 
     const eliminarProyecto = async (id) => {
         try {
-            await axiosClient.delete(`proyectos/${id}/`);
+            await axiosClient.delete(`/api/proyectos/${id}/`);
             setProyectos(proyectos.filter(proyecto => proyecto.id !== id));
             alert('Proyecto eliminado exitosamente');
         } catch (error) {
