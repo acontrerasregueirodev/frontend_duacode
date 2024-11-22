@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosClient from './axiosClient'; // Importar axiosClient
+import axiosClient from '../Kiosko/scripts/axiosClient'; // Importar axiosClient
 import EditarPerfil from './EditarPerfil';
 import './Perfil.css';
 
