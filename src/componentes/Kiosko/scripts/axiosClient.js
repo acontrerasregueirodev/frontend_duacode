@@ -23,8 +23,11 @@ axiosClient.interceptors.response.use(
 
     if (token) {
       console.log('Token CSRF capturado desde la respuesta:', token);
-      // Guardar el token CSRF en el encabezado para futuras solicitudes
+      // Guardar el token CSRF en el encabezado global para futuras solicitudes
       axiosClient.defaults.headers['X-CSRFToken'] = token;
+
+      // También aseguramos que el token CSRF esté en las cookies
+      document.cookie = `csrftoken=${token}; path=/; secure; samesite=None;`;
     } else {
       console.log('No se encontró token CSRF en la respuesta.');
     }
