@@ -8,6 +8,21 @@ const Bienvenida = () => {
 
   useEffect(() => {
     // Función para obtener el mensaje y el token CSRF
+    // const fetchWelcomeMessage = async () => {
+    //   try {
+    //     const response = await axiosClient.get('/'); // Cambia la URL si es necesario
+    //     console.log('Respuesta recibida:', response.data);
+
+    //     // Establecemos el mensaje y el token CSRF en el estado
+    //     setWelcomeMessage(response.data.message);
+    //     setCsrfToken(response.data.csrfToken);
+
+    //     // El token ya será usado automáticamente por axiosClient en futuras solicitudes
+    //   } catch (error) {
+    //     console.error('Error al obtener el mensaje:', error);
+    //   }
+    // };
+    // Función para obtener el mensaje y el token CSRF
     const fetchWelcomeMessage = async () => {
       try {
         const response = await axiosClient.get('/'); // Cambia la URL si es necesario
@@ -22,7 +37,6 @@ const Bienvenida = () => {
         console.error('Error al obtener el mensaje:', error);
       }
     };
-
     fetchWelcomeMessage();
   }, []); // Ejecuta el efecto solo una vez al montar el componente
 
