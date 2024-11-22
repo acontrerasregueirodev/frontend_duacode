@@ -1,30 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosClient from 'scripts/axiosClient';  // Importa el cliente de axios
 import './PanelProyectos.css';
-
-// Configuración global de axios
-const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
-if (csrfToken) {
-    axios.defaults.headers.common['X-CSRFToken'] = csrfToken[1];
-} else {
-    console.error("CSRF token no encontrado");
-}
-axios.defaults.headers.common['Authorization'] = '';  // Elimina cualquier valor de Authorization
-axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
-axios.defaults.withCredentials = true;  // Asegúrate de configurarlo globalmente
-
-// Función para obtener el token CSRF desde las cookies
-// const getCsrfToken = () => {
-//     const match = document.cookie.match(/csrftoken=([\w-]+)/);
-//     return match ? match[1] : null;
-// };
 
 const Proyectos = () => {
     const [proyectos, setProyectos] = useState([]);
-    const [empleados, setEmpleados] = useState([]); // Para guardar la lista de empleados
+    const [empleados, setEmpleados] = useState([]);
     const [loading, setLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
-    const [modalNuevoProyectoVisible, setModalNuevoProyectoVisible] = useState(false); // Modal para nuevo proyecto
+    const [modalNuevoProyectoVisible, setModalNuevoProyectoVisible] = useState(false);
     const [proyectoEditado, setProyectoEditado] = useState(null);
     const [empleadosSeleccionados, setEmpleadosSeleccionados] = useState([]);
     const [nuevoProyecto, setNuevoProyecto] = useState({
@@ -37,9 +20,7 @@ const Proyectos = () => {
 
     const obtenerProyectos = async () => {
         try {
-            const response = await axios.get('https://belami.pythonanywhere.com/api/proyectos/', {
-                withCredentials: true
-            });
+            const response = await axiosClient.get('proyectos/');
             setProyectos(Array.isArray(response.data) ? response.data : []);
             setLoading(false);
         } catch (error) {
@@ -50,10 +31,8 @@ const Proyectos = () => {
 
     const obtenerEmpleados = async () => {
         try {
-            const response = await axios.get('https://belami.pythonanywhere.com/api/empleados/', {
-                withCredentials: true
-            });
-            setEmpleados(response.data); // Guardar los empleados en el estado
+            const response = await axiosClient.get('empleados/');
+            setEmpleados(response.data);
         } catch (error) {
             console.error("Error al obtener los empleados:", error);
         }
@@ -61,20 +40,7 @@ const Proyectos = () => {
 
     const eliminarProyecto = async (id) => {
         try {
-            const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
-if (csrfToken) {
-    axios.defaults.headers.common['X-CSRFToken'] = csrfToken[1];
-} else {
-    console.error("CSRF token no encontrado");
-}
-axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
-
-            await axios.delete(`https://belami.pythonanywhere.com/api/proyectos/${id}/`, {
-                withCredentials: true,
-                headers: {
-                    'X-CSRFToken': csrfToken
-                }
-            });
+            await axiosClient.delete(`proyectos/${id}/`);
             setProyectos(proyectos.filter(proyecto => proyecto.id !== id));
             alert('Proyecto eliminado exitosamente');
         } catch (error) {
@@ -85,27 +51,19 @@ axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 
     const editarProyecto = (proyecto) => {
         setProyectoEditado(proyecto);
-        setEmpleadosSeleccionados(proyecto.empleados.map((empleado) => empleado.id)); // Asignar empleados del proyecto
+        setEmpleadosSeleccionados(proyecto.empleados.map((empleado) => empleado.id));
         setModalVisible(true);
     };
 
     const guardarEdicion = async () => {
         try {
-            // const csrfToken = getCsrfToken();
-            const empleadosActualizados = empleadosSeleccionados; // Solo los IDs de los empleados seleccionados
+            const empleadosActualizados = empleadosSeleccionados;
             const updatedProyecto = {
                 ...proyectoEditado,
                 empleados: empleadosActualizados,
             };
 
-            const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
-
-            await axios.put(`https://belami.pythonanywhere.com/api/proyectos/${updatedProyecto.id}/`, updatedProyecto, {
-                withCredentials: true,
-                        headers: {
-                'X-CSRFToken': csrfToken[1]
-                }
-            });
+            await axiosClient.put(`proyectos/${updatedProyecto.id}/`, updatedProyecto);
 
             setProyectos(proyectos.map(p => {
                 if (p.id === updatedProyecto.id) {
@@ -149,15 +107,7 @@ axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 
     const guardarNuevoProyecto = async () => {
         try {
-            // const csrfToken = getCsrfToken();
-
-            await axios.post('https://belami.pythonanywhere.com/api/proyectos/', nuevoProyecto, {
-                withCredentials: true,
-                headers: {
-                    'X-CSRFToken': csrfToken
-                }
-            });
-
+            await axiosClient.post('proyectos/', nuevoProyecto);
             obtenerProyectos();
             setModalNuevoProyectoVisible(false);
             alert('Nuevo proyecto creado exitosamente');
@@ -169,7 +119,7 @@ axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
 
     useEffect(() => {
         obtenerProyectos();
-        obtenerEmpleados(); // Obtener empleados cuando se monta el componente
+        obtenerEmpleados();
     }, []);
 
     if (loading) return <p>Cargando proyectos...</p>;
@@ -280,7 +230,9 @@ axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
                                         checked={empleadosSeleccionados.includes(empleado.id)}
                                         onChange={(e) => handleEmpleadoChange(e, empleado.id)}
                                     />
-                                    <label htmlFor={`empleado-${empleado.id}`}>{empleado.nombre} {empleado.apellido_1}</label>
+                                    <label htmlFor={`empleado-${empleado.id}`}>
+                                        {empleado.nombre} {empleado.apellido_1}
+                                    </label>
                                 </div>
                             ))}
                         </div>
@@ -291,11 +243,11 @@ axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
                 </div>
             )}
 
-            {/* Modal para nuevo proyecto */}
+            {/* Modal para crear un nuevo proyecto */}
             {modalNuevoProyectoVisible && (
                 <div className="modal">
                     <div className="modal-content">
-                        <h3>Crear Nuevo Proyecto</h3>
+                        <h3>Nuevo Proyecto</h3>
                         <label>
                             Nombre del Proyecto:
                             <input
@@ -332,7 +284,30 @@ axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
                             />
                         </label>
 
-                        <button onClick={guardarNuevoProyecto}>Guardar nuevo proyecto</button>
+                        <div className="empleados-no-asignados">
+                            <h4>Empleados</h4>
+                            {empleados.map((empleado) => (
+                                <div key={empleado.id}>
+                                    <input
+                                        type="checkbox"
+                                        id={`empleado-nuevo-${empleado.id}`}
+                                        checked={nuevoProyecto.empleados.includes(empleado.id)}
+                                        onChange={(e) => {
+                                            const { checked } = e.target;
+                                            const updatedEmpleados = checked
+                                                ? [...nuevoProyecto.empleados, empleado.id]
+                                                : nuevoProyecto.empleados.filter(id => id !== empleado.id);
+                                            setNuevoProyecto({ ...nuevoProyecto, empleados: updatedEmpleados });
+                                        }}
+                                    />
+                                    <label htmlFor={`empleado-nuevo-${empleado.id}`}>
+                                        {empleado.nombre} {empleado.apellido_1}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+
+                        <button onClick={guardarNuevoProyecto}>Crear Proyecto</button>
                         <button onClick={() => setModalNuevoProyectoVisible(false)}>Cancelar</button>
                     </div>
                 </div>

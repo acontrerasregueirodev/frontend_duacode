@@ -28,7 +28,6 @@ const Bienvenida = () => {
 
   return (
     <div className="bienvenida">
-      <h1>Bienvenido</h1>
       {welcomeMessage && <p>{welcomeMessage}</p>}
       {csrfToken && <p>Token CSRF capturado: {csrfToken}</p>}
       <Link to="/test">Ir a la página de prueba</Link>
