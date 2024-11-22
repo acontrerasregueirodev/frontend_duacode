@@ -5,7 +5,7 @@ import './Perfil.css';
 
 // Función para obtener el token CSRF
 const obtenerCsrfToken = () => {
-    return window.csrfToken;
+    return window.csrfToken; // Suponiendo que el token CSRF está disponible globalmente
 };
 
 const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
@@ -49,6 +49,7 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
             }
 
             console.log(respuesta.data.message);
+            alCerrarSesion(); // Llamar la función para manejar el cierre de sesión (prop de componente padre)
         } catch (error) {
             console.error('Error durante el cierre de sesión:', error.message);
         }
@@ -74,7 +75,7 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
             );
 
             establecerDatosEmpleado(respuesta.data);
-            establecerEnEdicion(false);
+            establecerEnEdicion(false); // Salir del modo edición
         } catch (error) {
             console.error('Error al actualizar el perfil:', error.message);
         }
@@ -91,6 +92,7 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
             {enEdicion ? (
                 <EditarPerfil 
                     id={id} 
+                    datosEmpleado={datosEmpleado} 
                     alGuardar={manejarGuardar} 
                     alCancelar={() => establecerEnEdicion(false)} 
                 />
@@ -124,3 +126,4 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
 };
 
 export default Perfil;
+
