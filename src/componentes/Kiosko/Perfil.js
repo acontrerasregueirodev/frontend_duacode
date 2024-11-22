@@ -74,7 +74,7 @@ const manejarGuardar = async (datosActualizados) => {
             {
                 headers: {
                     'Content-Type': 'application/json', // Solo necesario si es parte de los encabezados
-                    'X-CSRFToken': csrfToken, // Añadir manualmente el token CSRF en los encabezados
+                    // 'X-CSRFToken': csrfToken, // Añadir manualmente el token CSRF en los encabezados
                 },
                 withCredentials: true, // Asegurarse de enviar cookies y credenciales
             }
