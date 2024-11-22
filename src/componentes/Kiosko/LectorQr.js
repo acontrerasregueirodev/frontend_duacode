@@ -96,6 +96,7 @@ const LectorQr = () => {
       console.log('CSRF Token usado:', csrfToken || window.csrfStore.token);
 
       if (response.status === 200) {
+        console.log(response.data)
         localStorage.setItem('token', response.data.token); // Guardar el token de sesión en localStorage
         setWelcomeMessage(response.data.message);
         setIsAuthenticated(true);
