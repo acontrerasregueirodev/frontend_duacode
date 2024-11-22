@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import './LectorQr.css';
 import Perfil from './Perfil';
-import axiosClient from './axiosClient'; // Importamos axiosClient
+import axiosClient from '../Kiosko/scripts/axiosClient' // Importamos axiosClient
 
 const LectorQr = () => {
   const [username, setUsername] = useState("");
