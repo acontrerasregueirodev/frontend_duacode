@@ -12,7 +12,7 @@ const LectorQr = () => {
   const [qrScanned, setQrScanned] = useState(false);
   const videoRef = useRef(null);
   const videoStreamRef = useRef(null);
-
+  const token = window.csrfStore.token;
   const getCookie = (name) => {
     let cookieValue = null;
     if (document.cookie && document.cookie !== "") {
@@ -84,14 +84,14 @@ const LectorQr = () => {
         {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': csrfToken,
+            'X-CSRFToken': token,
           },
           withCredentials: true, // Esto es equivalente a `credentials: 'include'`
         }
       );
 
       // Imprimir el csrfToken en consola
-      console.log('CSRF Token:', csrfToken);
+      console.log('CSRF Token:', token);
 
       if (response.status === 200) {
         localStorage.setItem('token', response.data.token);
