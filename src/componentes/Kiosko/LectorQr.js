@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import './LectorQr.css';
 import Perfil from './Perfil';
-import axios from 'axios'
+import axiosClient from './axiosClient'; // Importamos axiosClient
 
 const LectorQr = () => {
   const [username, setUsername] = useState("");
@@ -73,33 +73,37 @@ const LectorQr = () => {
     };
   }, [isAuthenticated]);
 
-const handleSubmit = async () => {
+  const handleSubmit = async () => {
     try {
-        const response = await axios.post(
-            'https://belami.pythonanywhere.com/auth/login/', 
-            new URLSearchParams({
-                username: username,
-                password: password,
-            }),
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-CSRFToken': csrfToken,
-                },
-                withCredentials: true, // Esto es equivalente a `credentials: 'include'`
-            }
-        );
-
-        if (response.status === 200) {
-            localStorage.setItem('token', response.data.token);
-            setWelcomeMessage(response.data.message);
-            setIsAuthenticated(true);
+      const response = await axiosClient.post(
+        'auth/login/', 
+        new URLSearchParams({
+          username: username,
+          password: password,
+        }),
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken,
+          },
+          withCredentials: true, // Esto es equivalente a `credentials: 'include'`
         }
+      );
+
+      // Imprimir el csrfToken en consola
+      console.log('CSRF Token:', csrfToken);
+
+      if (response.status === 200) {
+        localStorage.setItem('token', response.data.token);
+        setWelcomeMessage(response.data.message);
+        setIsAuthenticated(true);
+      }
     } catch (error) {
-        const errorData = error.response?.data;
-        setWelcomeMessage(errorData?.message || 'Error al iniciar sesión');
+      const errorData = error.response?.data;
+      setWelcomeMessage(errorData?.message || 'Error al iniciar sesión');
     }
-};
+  };
+
   useEffect(() => {
     if (qrScanned && username && password) {
       handleSubmit();
@@ -123,35 +127,32 @@ const handleSubmit = async () => {
       <div className="video-form-container">
         <div className="video-container">
           <video id="preview" ref={videoRef} autoPlay></video>
-                  <div className="form-container">
-          <div className="form-group">
-            <label htmlFor="username">Usuario:</label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              value={username}
-              required
-              onChange={(e) => setUsername(e.target.value)}
-            />
+          <div className="form-container">
+            <div className="form-group">
+              <label htmlFor="username">Usuario:</label>
+              <input
+                type="text"
+                name="username"
+                id="username"
+                value={username}
+                required
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Contraseña:</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={password}
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <button onClick={handleSubmit} className="submit-button">Iniciar sesión</button>
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Contraseña:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={password}
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button onClick={handleSubmit} className="submit-button">Iniciar sesión</button>
-
         </div>
-        </div>
-
-
       </div>
 
       {welcomeMessage && <div className="welcome-message">{welcomeMessage}</div>}
