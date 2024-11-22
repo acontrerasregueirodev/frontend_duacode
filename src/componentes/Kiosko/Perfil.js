@@ -6,20 +6,11 @@ import axios from 'axios'
 
 // Función para obtener el token CSRF
 // Función para obtener el token CSRF de las cookies
-function obtenerCsrfToken() {
-    // Obtener todas las cookies del documento
-    const cookies = document.cookie.split(';');
-    
-    // Buscar la cookie csrf token
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim(); // Eliminar espacios
-        if (cookie.startsWith('csrftoken=')) {
-            return cookie.substring('csrftoken='.length, cookie.length); // Devuelve el valor del token
-        }
-    }
-    
-    return null; // Si no se encuentra el token, retorna null
-}
+const obtenerCsrfToken = () => {
+    const name = 'csrftoken='; 
+    const value = document.cookie.split(';').find(cookie => cookie.trim().startsWith(name));
+    return value ? value.split('=')[1] : '';
+};
 
 const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
     const [datosEmpleado, establecerDatosEmpleado] = useState(null); // Datos del empleado
