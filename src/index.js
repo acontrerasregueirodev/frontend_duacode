@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';  // Para manejar las rutas
 import './index.css';  // Importa los estilos globales
 import App from './App';  // El componente principal de la aplicación
 import './i18n';
-
+window.csrfStore = window.csrfStore || { token: '' };
 // Crear el root para React 18
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
