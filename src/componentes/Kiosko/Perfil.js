@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosClient from './axiosClient'; // Importar axiosClient
 import EditarPerfil from './EditarPerfil';
 import './Perfil.css';
 
@@ -16,7 +16,7 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
     // Función para obtener los datos del empleado
     const obtenerDatosEmpleado = async () => {
         try {
-            const respuesta = await axios.get(`https://belami.pythonanywhere.com/api/empleados/${id}/`);
+            const respuesta = await axiosClient.get(`api/empleados/${id}/`); // Usar axiosClient
             establecerDatosEmpleado(respuesta.data);
         } catch (error) {
             establecerError(error);
@@ -32,8 +32,8 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
     const manejarCierreSesion = async () => {
         try {
             const csrfToken = obtenerCsrfToken();
-            const respuesta = await axios.post(
-                'https://belami.pythonanywhere.com/auth/logout/',
+            const respuesta = await axiosClient.post(
+                'auth/logout/',
                 {},
                 {
                     headers: {
@@ -55,31 +55,30 @@ const Perfil = ({ id, estaAutenticado, alCerrarSesion }) => {
     };
 
     // Función para manejar la actualización de datos
-const manejarGuardar = async (datosActualizados) => {
-    const csrfToken = obtenerCsrfToken();
-    console.log("Token CSRF obtenido:", csrfToken);
-    console.log("Datos enviados para actualizar:", datosActualizados);
+    const manejarGuardar = async (datosActualizados) => {
+        const csrfToken = obtenerCsrfToken();
+        console.log("Token CSRF obtenido:", csrfToken);
+        console.log("Datos enviados para actualizar:", datosActualizados);
 
-    try {
-        const respuesta = await axios.put(
-            `https://belami.pythonanywhere.com/api/empleados/${id}/`,
-            datosActualizados,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken,
-                },
-                withCredentials: true,
-            }
-        );
+        try {
+            const respuesta = await axiosClient.put(
+                `api/empleados/${id}/`, // Usar axiosClient
+                datosActualizados,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken,
+                    },
+                    withCredentials: true,
+                }
+            );
 
-        establecerDatosEmpleado(respuesta.data);
-        establecerEnEdicion(false);
-    } catch (error) {
-        console.error('Error al actualizar el perfil:', error.message);
-    }
-};
-
+            establecerDatosEmpleado(respuesta.data);
+            establecerEnEdicion(false);
+        } catch (error) {
+            console.error('Error al actualizar el perfil:', error.message);
+        }
+    };
 
     // Muestra un mensaje de error si no se pudieron cargar los datos
     if (!datosEmpleado) {
@@ -112,10 +111,11 @@ const manejarGuardar = async (datosActualizados) => {
                         {datosEmpleado.foto && <img src={datosEmpleado.foto} alt={`${datosEmpleado.nombre} ${datosEmpleado.apellido_1}`} />}
                         <div className="buttons-section">
                             <button className="logout-button" onClick={manejarCierreSesion}>Cerrar Sesión</button>
-<button className="edit-button" onClick={() => {
-    console.log("Haciendo clic en Modificar Datos");
-    establecerEnEdicion(true);
-}}>Modificar Datos</button>                        </div>
+                            <button className="edit-button" onClick={() => {
+                                console.log("Haciendo clic en Modificar Datos");
+                                establecerEnEdicion(true);
+                            }}>Modificar Datos</button>
+                        </div>
                     </div>
                 </>
             )}
