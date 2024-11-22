@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axiosClient from './Kiosko/scripts/axiosClient; // Asegúrate de que la ruta sea correcta
+import axiosClient from './Kiosko/scripts/axiosClient'; 
 
 const Bienvenida = () => {
   const [welcomeMessage, setWelcomeMessage] = useState(''); // Estado para el mensaje
