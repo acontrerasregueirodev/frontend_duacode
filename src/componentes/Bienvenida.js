@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosClient from './Kiosko/scripts/axiosClient; // Asegúrate de que la ruta sea correcta
+
 const Bienvenida = () => {
-  const [welcomeMessage, setWelcomeMessage] = useState(""); // Estado para el mensaje
-  const [csrfToken, setCsrfToken] = useState("");  // Estado para el token CSRF
+  const [welcomeMessage, setWelcomeMessage] = useState(''); // Estado para el mensaje
+  const [csrfToken, setCsrfToken] = useState(''); // Estado para el token CSRF
 
   useEffect(() => {
-   // Función para obtener el mensaje y el token CSRF
-const fetchWelcomeMessage = async () => {
-  console.log("welcome message")
-  try {
-    const response = await axios.get("https://belami.pythonanywhere.com/", {
-    withCredentials: true, // Esto es necesario para enviar las cookies de CSRF
-    });
+    // Función para obtener el mensaje y el token CSRF
+    const fetchWelcomeMessage = async () => {
+      try {
+        const response = await axiosClient.get('/'); // Cambia la URL si es necesario
+        console.log('Respuesta recibida:', response.data);
 
-    // Si la respuesta es exitosa
-    console.log(response.data);
-    setWelcomeMessage(response.data.message);  // Establecemos el mensaje
-    setCsrfToken(response.data.csrfToken);  // Establecemos el token CSRF
+        // Establecemos el mensaje y el token CSRF en el estado
+        setWelcomeMessage(response.data.message);
+        setCsrfToken(response.data.csrfToken);
 
-  } catch (error) {
-    // Si ocurre un error al obtener el mensaje
-    console.error("Error al obtener el mensaje:", error);
-  }
-};
+        // El token ya será usado automáticamente por axiosClient en futuras solicitudes
+      } catch (error) {
+        console.error('Error al obtener el mensaje:', error);
+      }
+    };
 
     fetchWelcomeMessage();
-  }, []);  // Este efecto se ejecutará solo una vez cuando el componente se monte
+  }, []); // Ejecuta el efecto solo una vez al montar el componente
 
   return (
     <div className="bienvenida">
-      <h1>{welcomeMessage && <p>{welcomeMessage}</p>}</h1>
+      <h1>Bienvenido</h1>
+      {welcomeMessage && <p>{welcomeMessage}</p>}
+      {csrfToken && <p>Token CSRF capturado: {csrfToken}</p>}
       <Link to="/test">Ir a la página de prueba</Link>
     </div>
   );
-}
+};
 
 export default Bienvenida;
