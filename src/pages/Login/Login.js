@@ -3,6 +3,8 @@ import Webcam from "react-webcam";
 import jsQR from "jsqr";
 import "./Login.css";
 import {useNavigate} from "react-router-dom"
+import Cookies from "js-cookie"
+
 const slides = [
   {
     title: "DUACODE",
@@ -86,9 +88,16 @@ const handleLogin = async (e, qrUsername = null, qrPassword = null) => {
       console.log("Inicio de sesión exitoso", data);
       localStorage.setItem("access_token", data.access);
       localStorage.setItem("refresh_token", data.refresh);
+      // Almacena los tokens en las cookies
+      Cookies.set('access_token', data.access, { expires: 7, path: '' });
+      Cookies.set('refresh_token', data.refresh, { expires: 7, path: '' });
       setErrorMessage("");
       setQrOverlayVisible(false); // Cierra el overlay del QR si estaba activo
-      navigate("/admin/")
+      // navigate("/admin/")
+      // Redirigir a localhost:8000/dashboard
+      window.location.href = 'http://localhost:8000/dashboard';
+
+
     } else {
       const errorData = await response.json();
       setErrorMessage(errorData.detail || "Error en las credenciales");
